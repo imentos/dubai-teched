@@ -12,6 +12,7 @@ board.on("ready", function() {
     button = new five.Switch(0);
 
     button.on("open", function(value) {
+        console.log(channel + ":occupied");
         led.off();
 
         pubnub.publish({
@@ -23,6 +24,7 @@ board.on("ready", function() {
     });
 
     button.on("close", function(value) {
+        console.log(channel + ":free");
         led.on();
 
         pubnub.publish({
