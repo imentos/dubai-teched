@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
+  <script src="https://cdn.pubnub.com/pubnub-crypto.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+  <script src="http://pubnub.github.io/pubnub-angular/lib/pubnub-angular.js"></script>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container" ng-app="PubNubAngularApp" ng-controller="ChatCtrl">
+  
+<h4>Online Devices</h4>
+<!--<ul>
+  <li ng-repeat="(uuid, data) in devices">
+    <img ng-src="{{data.image}}" />
+    <br />
+    <b>{{data.uuid}}</b>
+    <br />
+    {{data.ts}}
+  </li>
+</ul>
+-->
+    <img ng-src="{{image}}" />
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
