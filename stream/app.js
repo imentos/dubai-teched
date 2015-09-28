@@ -2,8 +2,13 @@
 // Set Up Your Angular Module & Controller(s)
 //
 angular.module('PubNubAngularApp', ["pubnub.angular.service"])
-    .controller('ChatCtrl', function($rootScope, $scope, $location, PubNub) {
+    .controller('ChatCtrl', function($rootScope, $scope, $location, PubNub, $interval) {
         $scope.devices = {};
+
+        $interval(function() {
+            console.log("time");
+            $scope.image = "http://localhost:8080/images/flower.png";
+        }, 1000);
 
         // make up a channel name
         $scope.channel = 'test';
