@@ -5,10 +5,10 @@ angular.module('PubNubAngularApp', ["pubnub.angular.service"])
     .controller('ChatCtrl', function($rootScope, $scope, $location, PubNub, $interval) {
         $scope.devices = {};
 
-        $interval(function() {
-            console.log("time");
-            $scope.image = "http://localhost:8080/images/flower.png";
-        }, 1000);
+        // $interval(function() {
+        //     console.log("time");
+        //     $scope.image = "http://localhost:8080/images/flower.png";
+        // }, 1000);
 
         // make up a channel name
         $scope.channel = 'test';
@@ -30,17 +30,10 @@ angular.module('PubNubAngularApp', ["pubnub.angular.service"])
         // Register for message events
         $rootScope.$on(PubNub.ngMsgEv($scope.channel), function(ngEvent, payload) {
             $scope.$apply(function() {
-                //if (payload.message.uuid) {
-                //$scope.devices[payload.message.uuid] = payload.message;
-                //}
                 console.log(payload.message);
-                $scope.image = "http://localhost:8080/images/flower.png";
+                if (payload.message.image) {
+                    $scope.image = "http://localhost:8080/images/" + payload.message.image;
+                }
             });
-        });
-
-        // Populate message history (optional)
-        PubNub.ngHistory({
-            channel: $scope.channel,
-            count: 500
         });
     });
