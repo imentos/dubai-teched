@@ -1,9 +1,7 @@
-//
-// Set Up Your Angular Module & Controller(s)
-//
 angular.module('PubNubAngularApp', ["pubnub.angular.service"])
     .controller('ChatCtrl', function($rootScope, $scope, $location, PubNub, $interval) {
         $scope.devices = {};
+        $scope.freeCount = 1;
 
         // $interval(function() {
         //     console.log("time");
@@ -11,7 +9,7 @@ angular.module('PubNubAngularApp', ["pubnub.angular.service"])
         // }, 1000);
 
         // make up a channel name
-        $scope.channel = 'test';
+        $scope.channel = 'Parking Lot 1';
 
         if (!$rootScope.initialized) {
             // Initialize the PubNub service
@@ -31,8 +29,12 @@ angular.module('PubNubAngularApp', ["pubnub.angular.service"])
         $rootScope.$on(PubNub.ngMsgEv($scope.channel), function(ngEvent, payload) {
             $scope.$apply(function() {
                 console.log(payload.message);
-                if (payload.message.image) {
-                    $scope.image = "http://localhost:8080/images/" + payload.message.image;
+                if (payload.message.status) {
+                    if (payload.message.status == "free") {
+                        $scope.freeCount++;
+                    } else {
+                        $scope.freeCount--;
+                    }
                 }
             });
         });

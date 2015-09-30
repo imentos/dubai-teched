@@ -3,8 +3,12 @@ body {
     height: 100%;
 }
 
-.container {
-    height: 50%;
+.top {
+    height: 60%;
+}
+
+.bottom {
+    height: 40%;
 }
 
 .container {
@@ -12,6 +16,7 @@ body {
     width: 100%;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    border-spacing:2px;
 }
 
 .toprow,.bottomrow {
@@ -30,10 +35,29 @@ body {
 
 .map {
     display: table-cell;
-    background: pink;
+    background: black;
 }
 
 .parking {
     display: table-cell;
-    background: yellow;
+    background: black;
+}
+
+h1 {
+    color: white;
+}
+
+.occupied {  
+}
+
+.counter {
+    text-align: center;
+    font-size: 128px;
+    color: green;
+}
+
+.info {
+    text-align: center;
+    font-size: 32px;
+    color: white;
 }

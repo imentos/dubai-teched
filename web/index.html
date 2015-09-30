@@ -2,6 +2,10 @@
 <html lang="en">
 
 <head>
+    <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
+    <script src="https://cdn.pubnub.com/pubnub-crypto.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+    <script src="http://pubnub.github.io/pubnub-angular/lib/pubnub-angular.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,21 +23,45 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container top">
         <div class="row toprow">
-          <div class="col-md-12 no-float livefeed">livefeed</div>
+            <div class="col-md-12 no-float livefeed">livefeed</div>
         </div>
     </div>
-    <div class="container">
+    <div class="container bottom" ng-app="PubNubAngularApp" ng-controller="ChatCtrl">
         <div class="row bottomrow">
             <div class="col-md-6 no-float map">Map</div>
-            <div class="col-md-6 no-float parking">Parking</div>
+            <div class="col-md-6 no-float parking">
+                <h1>Parking</h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="counter">{{freeCount}}</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="counter">{{1- freeCount}}</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div>{{percentage}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="info">Available</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="info">Occupied</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="info">Occupied Ratio</div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="app.js"></script>
 </body>
 
 </html>
