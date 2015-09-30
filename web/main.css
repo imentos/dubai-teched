@@ -1,0 +1,39 @@
+html,
+body {
+    height: 100%;
+}
+
+.container {
+    height: 50%;
+}
+
+.container {
+    display: table;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.toprow,.bottomrow {
+    height: 100%;
+    display: table-row;
+}
+
+.no-float {
+    float: none;
+}
+
+.livefeed {
+    display: table-cell;
+    background: white;
+}
+
+.map {
+    display: table-cell;
+    background: pink;
+}
+
+.parking {
+    display: table-cell;
+    background: yellow;
+}
