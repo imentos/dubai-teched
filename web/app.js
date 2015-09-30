@@ -1,15 +1,19 @@
 angular.module('PubNubAngularApp', ["pubnub.angular.service"])
     .controller('ChatCtrl', function($rootScope, $scope, $location, PubNub, $interval) {
         $scope.devices = {};
-        $scope.freeCount = 1;
-
-        // $interval(function() {
-        //     console.log("time");
-        //     $scope.image = "http://localhost:8080/images/flower.png";
-        // }, 1000);
-
-        // make up a channel name
+        $scope.free = 2;
+        $scope.total = 2;
         $scope.channel = 'Parking Lot 1';
+
+        Circles.create({
+            id: 'circles-1',
+            percentage: 0,
+            radius: 80,
+            width: 10,
+            number: 0,
+            text: '%',
+            colors: ['#FFF', '#F00']
+        });
 
         if (!$rootScope.initialized) {
             // Initialize the PubNub service
@@ -31,10 +35,22 @@ angular.module('PubNubAngularApp', ["pubnub.angular.service"])
                 console.log(payload.message);
                 if (payload.message.status) {
                     if (payload.message.status == "free") {
-                        $scope.freeCount++;
+                        $scope.free++;
                     } else {
-                        $scope.freeCount--;
+                        $scope.free--;
                     }
+
+                    var occupied = $scope.total - $scope.free;
+                    var percentage = 100 * (occupied / $scope.total);
+                    Circles.create({
+                        id: 'circles-1',
+                        percentage: percentage,
+                        radius: 80,
+                        width: 10,
+                        number: percentage,
+                        text: '%',
+                        colors: ['#888', '#F00']
+                    });
                 }
             });
         });

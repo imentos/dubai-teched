@@ -35,13 +35,13 @@
                 <h1>Parking</h1>
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="counter">{{freeCount}}</div>
+                        <div class="free">{{free}}</div>
                     </div>
                     <div class="col-md-4">
-                        <div class="counter">{{1- freeCount}}</div>
+                        <div class="occupied">{{2 - free}}</div>
                     </div>
                     <div class="col-md-4">
-                        <div>{{percentage}}</div>
+                        <div class="percentage" id="circles-1"></div>
                     </div>
                 </div>
                 <div class="row">
@@ -62,6 +62,7 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="app.js"></script>
+        <script src="circles.js"></script>
 </body>
 
 </html>
