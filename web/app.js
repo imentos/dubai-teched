@@ -6,7 +6,9 @@ angular.module('PubNubAngularApp', ["pubnub.angular.service"])
         $scope.channel = 'Parking Lot 1';
 
         $(document).ready(function() {
-            $('[data-toggle="popover"]').popover();
+            $('[data-toggle="popover"]').popover({
+                container: ".livefeed"
+            });
         });
 
 

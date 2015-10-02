@@ -28,15 +28,22 @@
             <div class="col-md-12 no-float livefeed">livefeed</div>
         </div>
     </div>
+    <div class="container">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="my-container">
+                <a href="#" data-toggle="popover" title="" data-content="<div class='p-title'>Alert:</div><div class='p-content'>This <b>is</b> your div content</div><div class='p-blank'></div><div class='p-title'>Suggestion:</div><div class='p-content'>Using parking lot 2 on 11th st</div>" data-html="true" data-placement="top">
+                Toggle popover asdasd asd asd asd asd as d</a>
+            </div>
+        </div>
+    </div>
     <div class="container bottom" ng-app="PubNubAngularApp" ng-controller="ChatCtrl">
         <div class="row bottomrow">
-            <div class="col-md-6 no-float map">Map</div>
+            <div class="col-md-6 no-float map">
+                <h1>TRAFFIC</h1>
+            </div>
             <div id="parking" class="col-md-6 no-float parking">
-                <div class="my-container">
-                <a href="#" data-toggle="popover" title="Alert" data-content="Parking lot 1 is full" data-placement="top">
-                Toggle popover asdasd asd asd asd asd as d</a>
-                </div>
-                <h1>Parking</h1>
+                <h1>PARKING</h1>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="free">{{free}}</div>
