@@ -5,6 +5,11 @@ angular.module('PubNubAngularApp', ["pubnub.angular.service"])
         $scope.total = 2;
         $scope.channel = 'Parking Lot 1';
 
+        $(document).ready(function() {
+            $('[data-toggle="popover"]').popover();
+        });
+
+
         Circles.create({
             id: 'circles-1',
             percentage: 0,
@@ -12,7 +17,7 @@ angular.module('PubNubAngularApp', ["pubnub.angular.service"])
             width: 10,
             number: 0,
             text: '%',
-            colors: ['#FFF', '#F00']
+            colors: ['#FFF', '#E20613']
         });
 
         if (!$rootScope.initialized) {

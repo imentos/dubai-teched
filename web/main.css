@@ -1,6 +1,12 @@
+@font-face {
+    font-family: ben;
+    src: url(sansation_light.woff);
+}
+
 html,
 body {
     height: 100%;
+    width: 100%;
 }
 
 .top {
@@ -30,17 +36,17 @@ body {
 
 .livefeed {
     display: table-cell;
-    background: white;
+    background: gray;
 }
 
 .map {
     display: table-cell;
-    background: black;
+    background: #202020;
 }
 
 .parking {
     display: table-cell;
-    background: black;
+    background: #202020;
 }
 
 h1 {
@@ -49,20 +55,23 @@ h1 {
 
 .occupied {
     text-align: center;
-    font-size: 128px;
-    color: blue;  
+    font-size: 175px;
+    color: #E20613;
+    font-family: ben;
 }
 
 .free {
     text-align: center;
-    font-size: 128px;
-    color: green;
+    font-size: 175px;
+    color: #93C01F;
+    font-family: ben;
 }
 
 .info {
     text-align: center;
-    font-size: 32px;
+    font-size: 35px;
     color: white;
+    font-family: ben;
 }
 
 .percentage {
@@ -74,8 +83,35 @@ h1 {
 
 .circles-text {
     font-size: 30px;
+    font-family: ben;
 }
 
 .circles-number {
     font-size: 60px;
+    font-family: ben;
+}
+
+.popover{
+    max-width: 100%; /* Max Width of the popover (depending on the container!) */
+    background-color: #40AFCB;
+}
+
+.popover.top {
+    opacity: 0.7;
+}
+
+.popover-title {
+    color: blue;
+    font-size: 15px;
+}
+
+.popover-content {
+    background-color: #40AFCB;
+    font-size: 45px;
+    color: white;
+}
+
+.my-container {
+    margin:auto;
+    width:500px;
 }
