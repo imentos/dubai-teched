@@ -64,6 +64,19 @@ angular.module('PubNubAngularApp', ["pubnub.angular.service"])
                         $scope.free--;
                     }
 
+                    if ($scope.free < 0) {
+                        $scope.free++;
+                        alert("Cannot be less than zero")
+                        return;
+                    }
+
+                    if ($scope.free > $scope.total) {
+                        $scope.free--;
+                        alert("Only two parking lots")
+                        return;
+                    }                    
+
+
                     // logic for popup
                     $('#popover').popover({
                         container: ".livefeed"
