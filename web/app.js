@@ -8,8 +8,8 @@ function eventFire(el, etype) {
     }
 }
 
-angular.module('PubNubAngularApp', ["pubnub.angular.service"])
-    .controller('MainCtrl', function($rootScope, $scope, $location, PubNub, $timeout) {
+angular.module('mainApp', ["pubnub.angular.service", "webcam"])
+    .controller('mainController', function($rootScope, $scope, $location, PubNub, $timeout) {
         $scope.devices = {};
         $scope.free = 2;
         $scope.total = 2;

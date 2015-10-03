@@ -1,0 +1,22 @@
+{
+  "name": "web",
+  "version": "0.0.0",
+  "homepage": "https://github.com/imentos/dubai-teched",
+  "authors": [
+    "Ray Kuo <ray.kuo@sap.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "webcam": "webcam-directive#~3.0.0"
+  }
+}

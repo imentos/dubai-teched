@@ -22,10 +22,12 @@
     <![endif]-->
 </head>
 
-<body>
+<body ng-app="mainApp" ng-controller="mainController">
     <div class="container top">
         <div class="row toprow">
-            <div class="col-md-12 no-float livefeed">livefeed</div>
+            <div class="col-md-12 no-float livefeed">
+                <webcam width="100%" height="100%"></webcam>
+            </div>
         </div>
     </div>
     <div class="container">
@@ -37,7 +39,7 @@
             </div>
         </div>
     </div>
-    <div class="container bottom" ng-app="PubNubAngularApp" ng-controller="MainCtrl">
+    <div class="container bottom">
         <div class="row bottomrow">
             <div id="traffic" class="col-md-6 no-float map">
                 <h1>TRAFFIC</h1>
@@ -74,6 +76,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/webcam/app/scripts/webcam.js"></script>
         <script src="app.js"></script>
         <script src="circles.js"></script>
 </body>
