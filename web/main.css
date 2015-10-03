@@ -22,10 +22,11 @@ body {
     width: 100%;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    border-spacing:2px;
+    border-spacing: 2px;
 }
 
-.toprow,.bottomrow {
+.toprow,
+.bottomrow {
     height: 100%;
     display: table-row;
 }
@@ -41,7 +42,7 @@ body {
 
 .map {
     display: table-cell;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("traffic.jpg") 
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("traffic.jpg")
 }
 
 .parking {
@@ -52,6 +53,8 @@ body {
 h1 {
     color: white;
     padding-left: 25px;
+    position: absolute;
+    z-index: 1;
 }
 
 .occupied {
@@ -76,9 +79,9 @@ h1 {
 }
 
 .percentage {
-    margin: auto; 
-    padding-top: 30px;
-    width: 40%; 
+    margin: auto;
+    padding-top: 50px;
+    width: 40%;
     color: white;
 }
 
@@ -92,8 +95,9 @@ h1 {
     font-family: ben;
 }
 
-.popover{
-    max-width: 100%; /* Max Width of the popover (depending on the container!) */
+.popover {
+    max-width: 100%;
+    /* Max Width of the popover (depending on the container!) */
     background-color: #40AFCB;
 }
 
@@ -113,13 +117,13 @@ h1 {
 }
 
 .my-container {
-    margin:auto;
-    width:500px;
+    margin: auto;
+    width: 500px;
 }
 
 .p-title {
-    margin:auto;
-    width:750px;
+    margin: auto;
+    width: 750px;
     text-align: center;
 }
 
@@ -128,13 +132,13 @@ h1 {
 }
 
 .p-content {
-    margin:auto;
-    width:750px;
+    margin: auto;
+    width: 750px;
     text-align: center;
 }
 
 .arrow {
-  /*border-width: 50px !important;*/
+    /*border-width: 50px !important;*/
 }
 
 a {
@@ -142,5 +146,5 @@ a {
 }
 
 .popover.top .arrow:after {
-  border-top-color: #40AFCB;
+    border-top-color: #40AFCB;
 }

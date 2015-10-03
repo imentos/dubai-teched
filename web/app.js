@@ -1,19 +1,36 @@
+function eventFire(el, etype) {
+    if (el.fireEvent) {
+        el.fireEvent('on' + etype);
+    } else {
+        var evObj = document.createEvent('Events');
+        evObj.initEvent(etype, true, false);
+        el.dispatchEvent(evObj);
+    }
+}
+
 angular.module('PubNubAngularApp', ["pubnub.angular.service"])
-    .controller('ChatCtrl', function($rootScope, $scope, $location, PubNub, $interval) {
+    .controller('MainCtrl', function($rootScope, $scope, $location, PubNub, $timeout) {
         $scope.devices = {};
         $scope.free = 2;
         $scope.total = 2;
         $scope.channel = 'Parking Lot 1';
 
-        $(document).ready(function() {
-            $('[data-toggle="popover"]').popover({
-                container: ".livefeed"
-            });
-        });
+        var canvas = document.getElementById("trafficCanvas");
+        var traffic = document.getElementById("traffic");
+        canvas.style.top = "-10px";
+        canvas.style.left = "-10px";
+        canvas.style.position = "absolute";
+        var ctx = canvas.getContext("2d");
+        ctx.strokeStyle = "#FF0000";
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineWidth = 10;
+        ctx.lineTo(300, 150);
+        ctx.stroke();
 
-
+        // init ratio chart
         Circles.create({
-            id: 'circles-1',
+            id: 'ratioDiv',
             percentage: 0,
             radius: 80,
             width: 10,
@@ -47,10 +64,20 @@ angular.module('PubNubAngularApp', ["pubnub.angular.service"])
                         $scope.free--;
                     }
 
+                    // logic for popup
+                    $('#popover').popover({
+                        container: ".livefeed"
+                    });
+                    eventFire($("#popover")[0], "click");
+                    $timeout(function() {
+                        $('#popover').popover('destroy');
+                    }, 3000);
+
+                    // animate the ratio chart
                     var occupied = $scope.total - $scope.free;
                     var percentage = 100 * (occupied / $scope.total);
                     Circles.create({
-                        id: 'circles-1',
+                        id: 'ratioDiv',
                         percentage: percentage,
                         radius: 80,
                         width: 10,
