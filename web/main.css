@@ -60,8 +60,11 @@ body {
 h1 {
     color: white;
     padding-left: 25px;
-    position: absolute;
+/*    position: absolute;
     z-index: 1;
+*/
+    font-family: ben-light;
+    font-weight: bold;
 }
 
 .occupied {

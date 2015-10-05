@@ -8,72 +8,66 @@ function eventFire(el, etype) {
     }
 }
 
-function updateBoundingBox() {
-    var canvas = document.getElementById("bbCanvas");
-    var ctx = canvas.getContext("2d");
-    ctx.strokeStyle = "#FF0000";
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineWidth = 1;
-    ctx.lineTo(1200, 900);
-    ctx.stroke();
-}
-
-function updateTraffic() {
-    var canvas = document.getElementById("trafficCanvas");
-    canvas.style.top = "-10px";
-    canvas.style.left = "-10px";
-    canvas.style.position = "absolute";
-    var ctx = canvas.getContext("2d");
-    ctx.strokeStyle = "#FF0000";
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineWidth = 1;
-    ctx.lineTo(300, 150);
-    ctx.stroke();
-}
-
-function updateRatio() {
-    // animate the ratio chart
-    var occupied = $scope.total - $scope.free;
-    var percentage = 100 * (occupied / $scope.total);
-    Circles.create({
-        id: 'ratioDiv',
-        percentage: percentage,
-        radius: 80,
-        width: 10,
-        number: percentage,
-        text: '%',
-        colors: ['#888', '#F00']
-    });
-}
-
 angular.module('mainApp', ["pubnub.angular.service", "webcam"])
     .controller('mainController', function($rootScope, $scope, $location, PubNub, $timeout) {
         $scope.devices = {};
         $scope.free = 2;
         $scope.total = 2;
-        $scope.channel = 'Parking Lot 1';
+        $scope.bbCanvas = $("#bbCanvas")[0];
+        $scope.bbCanvasCtx = $scope.bbCanvas.getContext("2d");
 
-        updateTraffic();
+        $scope.updateRatio = function() {
+            var occupied = $scope.total - $scope.free;
+            var percentage = 100 * (occupied / $scope.total);
+            Circles.create({
+                id: 'ratioDiv',
+                percentage: percentage,
+                radius: 80,
+                width: 10,
+                number: percentage,
+                text: '%',
+                colors: ['#888', '#F00']
+            });
+        }
 
-        updateBoundingBox();
+        $scope.updateTraffic = function() {
+            var canvas = document.getElementById("trafficCanvas");
+            canvas.style.top = "-10px";
+            canvas.style.left = "-10px";
+            canvas.style.position = "absolute";
+            var ctx = canvas.getContext("2d");
+            ctx.strokeStyle = "#FF0000";
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineWidth = 1;
+            ctx.lineTo(300, 150);
+            ctx.stroke();
+        }
+
+        $scope.updateBoundingBox = function(bbox) {
+            $scope.bbCanvasCtx.clearRect(0, 0, $scope.bbCanvas.width, $scope.bbCanvas.height);
+            $scope.bbCanvasCtx.beginPath()
+            $scope.bbCanvasCtx.rect(bbox.x, bbox.y, bbox.w, bbox.h);
+            $scope.bbCanvasCtx.lineWidth = 2;
+            $scope.bbCanvasCtx.stroke();
+        }
+
+        $scope.updateTraffic();
+
+        $scope.bbCanvasCtx.strokeStyle = "#FF0000";
+        $scope.updateBoundingBox({
+            x: 10,
+            y: 10,
+            w: 100,
+            h: 50
+        });
 
         // test
         $('#popover').popover({
             container: ".livefeed"
         });
 
-        // init ratio chart
-        Circles.create({
-            id: 'ratioDiv',
-            percentage: 0,
-            radius: 80,
-            width: 10,
-            number: 0,
-            text: '%',
-            colors: ['#FFF', '#E20613']
-        });
+        $scope.updateRatio();
 
         if (!$rootScope.initialized) {
             // Initialize the PubNub service
@@ -84,13 +78,26 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
             $rootScope.initialized = true;
         }
 
-        // Subscribe to the Channel
+
+
+
+        // bounding box sockets
         PubNub.ngSubscribe({
-            channel: $scope.channel
+            channel: 'bbox'
+        });
+        $rootScope.$on(PubNub.ngMsgEv('bbox'), function(ngEvent, payload) {
+            $scope.$apply(function() {
+                console.log(payload.message);
+                var bbox = payload.message
+                $scope.updateBoundingBox(bbox)
+            });
         });
 
-        // Register for message events
-        $rootScope.$on(PubNub.ngMsgEv($scope.channel), function(ngEvent, payload) {
+        // parking sockets
+        PubNub.ngSubscribe({
+            channel: 'Parking Lot 1'
+        });
+        $rootScope.$on(PubNub.ngMsgEv('Parking Lot 1'), function(ngEvent, payload) {
             $scope.$apply(function() {
                 console.log(payload.message);
                 if (payload.message.status) {
@@ -121,7 +128,7 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
                         $('#popover').popover('destroy');
                     }, 3000);
 
-                    updateRatio();
+                    $scope.updateRatio();
                 }
             });
         });
