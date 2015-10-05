@@ -1,6 +1,11 @@
 @font-face {
-    font-family: ben;
-    src: url(sansation_light.woff);
+    font-family: ben-light;
+    src: url('fonts/BentonSans-Light.ttf');
+}
+
+@font-face {
+    font-family: ben-medium;
+    src: url(fonts/BentonSans-Medium.ttf);
 }
 
 html,
@@ -38,6 +43,8 @@ body {
 .livefeed {
     display: table-cell;
     background: gray;
+    margin: auto 0;
+    text-align: center;
 }
 
 .map {
@@ -61,21 +68,21 @@ h1 {
     text-align: center;
     font-size: 175px;
     color: #E20613;
-    font-family: ben;
+    font-family: ben-light;
 }
 
 .free {
     text-align: center;
     font-size: 175px;
     color: #93C01F;
-    font-family: ben;
+    font-family: ben-light;
 }
 
 .info {
     text-align: center;
     font-size: 35px;
     color: white;
-    font-family: ben;
+    font-family: ben-light;
 }
 
 .percentage {
@@ -87,12 +94,12 @@ h1 {
 
 .circles-text {
     font-size: 30px;
-    font-family: ben;
+    font-family: ben-light;
 }
 
 .circles-number {
     font-size: 60px;
-    font-family: ben;
+    font-family: ben-light;
 }
 
 .popover {
@@ -147,4 +154,17 @@ a {
 
 .popover.top .arrow:after {
     border-top-color: #40AFCB;
+}
+
+video {
+    width: 1200px !important;
+    height: 900px !important;
+}
+
+#bbCanvas {
+    position: absolute;
+    margin-left: -600px;
+    width: 1200px;
+    height: 900px;
+    /*background-color: red;*/
 }

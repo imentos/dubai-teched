@@ -8,6 +8,17 @@ function eventFire(el, etype) {
     }
 }
 
+function drawBoundingBox() {
+    var canvas = document.getElementById("bbCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "#FF0000";
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineWidth = 10;
+    ctx.lineTo(1200, 900);
+    ctx.stroke();
+}
+
 angular.module('mainApp', ["pubnub.angular.service", "webcam"])
     .controller('mainController', function($rootScope, $scope, $location, PubNub, $timeout) {
         $scope.devices = {};
@@ -15,8 +26,8 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
         $scope.total = 2;
         $scope.channel = 'Parking Lot 1';
 
+        // traffic canvas
         var canvas = document.getElementById("trafficCanvas");
-        var traffic = document.getElementById("traffic");
         canvas.style.top = "-10px";
         canvas.style.left = "-10px";
         canvas.style.position = "absolute";
@@ -27,6 +38,8 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
         ctx.lineWidth = 10;
         ctx.lineTo(300, 150);
         ctx.stroke();
+
+        drawBoundingBox();
 
         // init ratio chart
         Circles.create({
@@ -74,7 +87,7 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
                         $scope.free--;
                         alert("Only two parking lots")
                         return;
-                    }                    
+                    }
 
 
                     // logic for popup
