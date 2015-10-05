@@ -5,7 +5,7 @@
 
 @font-face {
     font-family: ben-medium;
-    src: url(fonts/BentonSans-Medium.ttf);
+    src: url('fonts/BentonSans-Medium.ttf');
 }
 
 html,
@@ -132,16 +132,18 @@ h1 {
     margin: auto;
     width: 750px;
     text-align: center;
+    font-family: ben-medium;
 }
 
 .p-blank {
-    padding: 50px;
+    padding: 25px;
 }
 
 .p-content {
     margin: auto;
     width: 750px;
     text-align: center;
+    font-family: ben-light;
 }
 
 .arrow {

@@ -8,15 +8,44 @@ function eventFire(el, etype) {
     }
 }
 
-function drawBoundingBox() {
+function updateBoundingBox() {
     var canvas = document.getElementById("bbCanvas");
     var ctx = canvas.getContext("2d");
     ctx.strokeStyle = "#FF0000";
     ctx.beginPath();
     ctx.moveTo(0, 0);
-    ctx.lineWidth = 10;
+    ctx.lineWidth = 1;
     ctx.lineTo(1200, 900);
     ctx.stroke();
+}
+
+function updateTraffic() {
+    var canvas = document.getElementById("trafficCanvas");
+    canvas.style.top = "-10px";
+    canvas.style.left = "-10px";
+    canvas.style.position = "absolute";
+    var ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "#FF0000";
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineWidth = 1;
+    ctx.lineTo(300, 150);
+    ctx.stroke();
+}
+
+function updateRatio() {
+    // animate the ratio chart
+    var occupied = $scope.total - $scope.free;
+    var percentage = 100 * (occupied / $scope.total);
+    Circles.create({
+        id: 'ratioDiv',
+        percentage: percentage,
+        radius: 80,
+        width: 10,
+        number: percentage,
+        text: '%',
+        colors: ['#888', '#F00']
+    });
 }
 
 angular.module('mainApp', ["pubnub.angular.service", "webcam"])
@@ -26,20 +55,14 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
         $scope.total = 2;
         $scope.channel = 'Parking Lot 1';
 
-        // traffic canvas
-        var canvas = document.getElementById("trafficCanvas");
-        canvas.style.top = "-10px";
-        canvas.style.left = "-10px";
-        canvas.style.position = "absolute";
-        var ctx = canvas.getContext("2d");
-        ctx.strokeStyle = "#FF0000";
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineWidth = 10;
-        ctx.lineTo(300, 150);
-        ctx.stroke();
+        updateTraffic();
 
-        drawBoundingBox();
+        updateBoundingBox();
+
+        // test
+        $('#popover').popover({
+            container: ".livefeed"
+        });
 
         // init ratio chart
         Circles.create({
@@ -89,7 +112,6 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
                         return;
                     }
 
-
                     // logic for popup
                     $('#popover').popover({
                         container: ".livefeed"
@@ -99,18 +121,7 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
                         $('#popover').popover('destroy');
                     }, 3000);
 
-                    // animate the ratio chart
-                    var occupied = $scope.total - $scope.free;
-                    var percentage = 100 * (occupied / $scope.total);
-                    Circles.create({
-                        id: 'ratioDiv',
-                        percentage: percentage,
-                        radius: 80,
-                        width: 10,
-                        number: percentage,
-                        text: '%',
-                        colors: ['#888', '#F00']
-                    });
+                    updateRatio();
                 }
             });
         });
