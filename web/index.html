@@ -26,9 +26,9 @@
     <div class="container top">
         <div class="row toprow">
             <div class="col-md-12 no-float livefeed">
-                <canvas id="bbCanvas" width="1200px" height="900px" >
+                <canvas id="bbCanvas" width="1200px" height="900px">
                 </canvas>
-                <!-- <webcam></webcam> -->
+                <webcam channel="channel" on-stream="onStream(stream)" on-streaming="onSuccess()" on-error="onError(err)">></webcam>
                 <div class="BG"></div>
             </div>
         </div>

@@ -9,13 +9,25 @@ function eventFire(el, etype) {
 }
 
 angular.module('mainApp', ["pubnub.angular.service", "webcam"])
-    .controller('mainController', function($rootScope, $scope, $location, PubNub, $timeout) {
+    .controller('mainController', function($rootScope, $scope, $location, PubNub, $timeout, $interval) {
         $scope.devices = {};
         $scope.free = 2;
         $scope.total = 2;
         $scope.bbCanvas = $("#bbCanvas")[0];
         $scope.bbCanvasCtx = $scope.bbCanvas.getContext("2d");
         $scope.bbCanvasCtx.strokeStyle = "#FF0000";
+
+        var _video = null;
+        $scope.patOpts = {
+            x: 0,
+            y: 0,
+            w: 25,
+            h: 25
+        };
+
+        $interval(function() {
+            $scope.makeSnapshot();
+        }, 1000);
 
         $scope.updateRatio = function() {
             var occupied = $scope.total - $scope.free;
@@ -32,17 +44,17 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
         }
 
         $scope.updateTraffic = function() {
-            var canvas = document.getElementById("trafficCanvas");
-            canvas.style.top = "-10px";
-            canvas.style.left = "-10px";
-            canvas.style.position = "absolute";
-            var ctx = canvas.getContext("2d");
-            ctx.strokeStyle = "#FF0000";
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.lineWidth = 1;
-            ctx.lineTo(300, 150);
-            ctx.stroke();
+            // var canvas = document.getElementById("trafficCanvas");
+            // canvas.style.top = "-10px";
+            // canvas.style.left = "-10px";
+            // canvas.style.position = "absolute";
+            // var ctx = canvas.getContext("2d");
+            // ctx.strokeStyle = "#FF0000";
+            // ctx.beginPath();
+            // ctx.moveTo(0, 0);
+            // ctx.lineWidth = 1;
+            // ctx.lineTo(300, 150);
+            // ctx.stroke();
         }
 
         $scope.updateBoundingBox = function(bboxes) {
@@ -54,6 +66,41 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
                 $scope.bbCanvasCtx.lineWidth = 2;
                 $scope.bbCanvasCtx.stroke();
             }
+        }
+
+        $scope.makeSnapshot = function makeSnapshot() {
+            if (_video) {
+                var patCanvas = document.createElement('canvas');
+                patCanvas.width = _video.width;
+                patCanvas.height = _video.height;
+                var ctxPat = patCanvas.getContext('2d');
+
+                var idata = getVideoData($scope.patOpts.x, $scope.patOpts.y, $scope.patOpts.w, $scope.patOpts.h);
+                ctxPat.putImageData(idata, 0, 0);
+
+                console.log(patCanvas.toDataURL());
+            }
+        };
+
+        var getVideoData = function getVideoData(x, y, w, h) {
+            var hiddenCanvas = document.createElement('canvas');
+            hiddenCanvas.width = _video.width;
+            hiddenCanvas.height = _video.height;
+            var ctx = hiddenCanvas.getContext('2d');
+            ctx.drawImage(_video, 0, 0, _video.width, _video.height);
+            return ctx.getImageData(x, y, w, h);
+        };
+
+        $scope.onError = function(err) {}
+
+        $scope.onStream = function(stream) {}
+
+        $scope.onSuccess = function() {
+            _video = $scope.channel.video;
+            $scope.$apply(function() {
+                $scope.patOpts.w = _video.width;
+                $scope.patOpts.h = _video.height;
+            });
         }
 
         $scope.updateTraffic();
@@ -73,6 +120,10 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
             });
             $rootScope.initialized = true;
         }
+
+
+
+
 
 
 
