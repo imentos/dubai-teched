@@ -15,6 +15,7 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
         $scope.total = 2;
         $scope.bbCanvas = $("#bbCanvas")[0];
         $scope.bbCanvasCtx = $scope.bbCanvas.getContext("2d");
+        $scope.bbCanvasCtx.strokeStyle = "#FF0000";
 
         $scope.updateRatio = function() {
             var occupied = $scope.total - $scope.free;
@@ -44,23 +45,18 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
             ctx.stroke();
         }
 
-        $scope.updateBoundingBox = function(bbox) {
+        $scope.updateBoundingBox = function(bboxes) {
             $scope.bbCanvasCtx.clearRect(0, 0, $scope.bbCanvas.width, $scope.bbCanvas.height);
-            $scope.bbCanvasCtx.beginPath()
-            $scope.bbCanvasCtx.rect(bbox.x, bbox.y, bbox.w, bbox.h);
-            $scope.bbCanvasCtx.lineWidth = 2;
-            $scope.bbCanvasCtx.stroke();
+            for (var i = 0; i < bboxes.length; i++) {
+                var bbox = bboxes[i];
+                $scope.bbCanvasCtx.beginPath()
+                $scope.bbCanvasCtx.rect(1200.0 * (bbox.x / 8.33) / 489, 900.0 * (bbox.y / 8.33) / 367, 1200.0 * (bbox.w / 8.33) / 489, 900.0 * (bbox.h / 8.33) / 367);
+                $scope.bbCanvasCtx.lineWidth = 2;
+                $scope.bbCanvasCtx.stroke();
+            }
         }
 
         $scope.updateTraffic();
-
-        $scope.bbCanvasCtx.strokeStyle = "#FF0000";
-        $scope.updateBoundingBox({
-            x: 10,
-            y: 10,
-            w: 100,
-            h: 50
-        });
 
         // test
         $('#popover').popover({
@@ -88,8 +84,7 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
         $rootScope.$on(PubNub.ngMsgEv('bbox'), function(ngEvent, payload) {
             $scope.$apply(function() {
                 console.log(payload.message);
-                var bbox = payload.message
-                $scope.updateBoundingBox(bbox)
+                $scope.updateBoundingBox(payload.message);
             });
         });
 

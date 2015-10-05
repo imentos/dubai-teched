@@ -60,9 +60,6 @@ body {
 h1 {
     color: white;
     padding-left: 25px;
-/*    position: absolute;
-    z-index: 1;
-*/
     font-family: ben-light;
     font-weight: bold;
 }
@@ -176,4 +173,12 @@ video {
     width: 1200px;
     height: 900px;
     /*background-color: red;*/
+}
+
+.BG {
+    width: 1200px !important;
+    height: 900px !important;
+    background: url(IMG_0175-1.jpg);
+    margin: auto;
+    background-size: 100% 100%;
 }
