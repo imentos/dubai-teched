@@ -88,6 +88,10 @@ h1 {
     font-family: ben-light;
 }
 
+.adjust {
+    margin-top: -30px;
+}
+
 .percentage {
     margin: auto;
     padding-top: 50px;
