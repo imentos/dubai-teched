@@ -53,7 +53,7 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
                 console.log(patCanvas.toDataURL('image/jpeg'));
 
                 // send to server to dump the image
-                //socket.emit('snapshot', patCanvas.toDataURL('image/jpeg'));
+                socket.emit('snapshot', patCanvas.toDataURL('image/jpeg'));
             }
         };
 
