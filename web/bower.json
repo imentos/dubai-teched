@@ -17,6 +17,9 @@
     "tests"
   ],
   "dependencies": {
-    "webcam": "webcam-directive#~3.0.0"
+    "webcam": "webcam-directive#~3.0.0",
+    "jquery": "~2.1.4",
+    "pubnub-angular": "~1.1.0",
+    "pubnub": "~3.7.14"
   }
 }
