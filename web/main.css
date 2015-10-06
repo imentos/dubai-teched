@@ -163,21 +163,34 @@ a {
 }
 
 video {
-    width: 1200px !important;
-    height: 900px !important;
+    width: 1920px !important;
+    height: 1028px !important;
+}
+
+.videoInsert {
+    position: absolute; 
+    right: 0; 
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto; 
+    height: auto; 
+    z-index: -100;
+    background-size: cover;
+    overflow: hidden;
 }
 
 #bbCanvas {
     position: absolute;
-    margin-left: -600px;
-    width: 1200px;
-    height: 900px;
+    margin-left: -960px;
+    width: 1920px;
+    height: 1028px;
     /*background-color: red;*/
 }
 
 .BG {
-    width: 1200px !important;
-    height: 900px !important;
+    width: 1920px !important;
+    height: 1028px !important;
     background: url(IMG_0175-1.jpg);
     margin: auto;
     background-size: 100% 100%;
