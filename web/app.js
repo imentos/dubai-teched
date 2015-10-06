@@ -87,12 +87,12 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
         $scope.updateBoundingBox = function(bboxes) {
             $scope.bbCanvasCtx.clearRect(0, 0, $scope.bbCanvas.width, $scope.bbCanvas.height);
 
-            // test
-            $scope.bbCanvasCtx.beginPath()
-            $scope.bbCanvasCtx.moveTo(0, 0);
-            $scope.bbCanvasCtx.lineTo(1200.0, 900.0);
-            $scope.bbCanvasCtx.lineWidth = 2;
-            $scope.bbCanvasCtx.stroke();
+            // // test
+            // $scope.bbCanvasCtx.beginPath()
+            // $scope.bbCanvasCtx.moveTo(0, 0);
+            // $scope.bbCanvasCtx.lineTo(1200.0, 900.0);
+            // $scope.bbCanvasCtx.lineWidth = 2;
+            // $scope.bbCanvasCtx.stroke();
 
 
             for (var i = 0; i < bboxes.length; i++) {
@@ -118,20 +118,25 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
             });
         }
 
-        $scope.updateTraffic = function() {
+        $scope.updateTraffic = function(carCount) {
             var canvas = document.getElementById("trafficCanvas");
             var ctx = canvas.getContext("2d");
-            ctx.strokeStyle = "#FF0000";
+            if (carCount < 3) {
+                ctx.strokeStyle = "#00FF00";
+            } else if (carCount >= 3 && carCount < 5) {
+                ctx.strokeStyle = "#FFFF00";
+            } else if (carCount >= 5) {
+                ctx.strokeStyle = "#FF0000";
+            }
             ctx.beginPath();
             ctx.moveTo(0, 0);
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 5;
             ctx.lineTo(300, 150);
             ctx.stroke();
         }
 
-        $scope.updateTraffic();
-
         // test
+        //$scope.updateTraffic(4);
         $('#popover').popover({
             container: ".livefeed"
         });
@@ -154,6 +159,8 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
 
 
 
+        //////////////////////////////////////////////////////
+
         // bounding box sockets
         PubNub.ngSubscribe({
             channel: 'bbox'
@@ -161,7 +168,10 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
         $rootScope.$on(PubNub.ngMsgEv('bbox'), function(ngEvent, payload) {
             $scope.$apply(function() {
                 console.log(payload.message);
+
                 $scope.updateBoundingBox(payload.message);
+                
+                $scope.updateTraffic(payload.message.length);
             });
         });
 

@@ -166,6 +166,14 @@ a {
     border-top-color: #40AFCB;
 }
 
+#trafficCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 .webcam-live {
     position: absolute;
     right: 0;
@@ -179,15 +187,6 @@ a {
     overflow: hidden;
 }
 
-#trafficCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-}
-
 #bbCanvas {
     position: absolute;
     right: 0;
@@ -196,7 +195,7 @@ a {
     min-height: 100%;
     width: auto;
     height: auto;
-    /*z-index: -100;*/
+    z-index: 1;
     background-size: cover;
     overflow: hidden;
 }
