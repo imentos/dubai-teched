@@ -40,27 +40,6 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
             $scope.makeSnapshot();
         }, 1000);
 
-        $scope.updateBoundingBox = function(bboxes) {
-            $scope.bbCanvasCtx.clearRect(0, 0, $scope.bbCanvas.width, $scope.bbCanvas.height);
-
-
-            // test
-            $scope.bbCanvasCtx.beginPath()
-            $scope.bbCanvasCtx.moveTo(0, 0);
-            $scope.bbCanvasCtx.lineTo(1200.0, 900.0);
-            $scope.bbCanvasCtx.lineWidth = 2;
-            $scope.bbCanvasCtx.stroke();
-
-
-            for (var i = 0; i < bboxes.length; i++) {
-                var bbox = bboxes[i];
-                $scope.bbCanvasCtx.beginPath()
-                $scope.bbCanvasCtx.rect(1200.0 * (bbox.x / 8.33) / 489, 900.0 * (bbox.y / 8.33) / 367, 1200.0 * (bbox.w / 8.33) / 489, 900.0 * (bbox.h / 8.33) / 367);
-                $scope.bbCanvasCtx.lineWidth = 2;
-                $scope.bbCanvasCtx.stroke();
-            }
-        }
-
         $scope.makeSnapshot = function makeSnapshot() {
             if (_video) {
                 var patCanvas = document.createElement('canvas');
@@ -105,8 +84,25 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
 
 
         //////////////////////////////////////////////////////
+        $scope.updateBoundingBox = function(bboxes) {
+            $scope.bbCanvasCtx.clearRect(0, 0, $scope.bbCanvas.width, $scope.bbCanvas.height);
+
+            // test
+            $scope.bbCanvasCtx.beginPath()
+            $scope.bbCanvasCtx.moveTo(0, 0);
+            $scope.bbCanvasCtx.lineTo(1200.0, 900.0);
+            $scope.bbCanvasCtx.lineWidth = 2;
+            $scope.bbCanvasCtx.stroke();
 
 
+            for (var i = 0; i < bboxes.length; i++) {
+                var bbox = bboxes[i];
+                $scope.bbCanvasCtx.beginPath()
+                $scope.bbCanvasCtx.rect(1200.0 * (bbox.x / 8.33) / 489, 900.0 * (bbox.y / 8.33) / 367, 1200.0 * (bbox.w / 8.33) / 489, 900.0 * (bbox.h / 8.33) / 367);
+                $scope.bbCanvasCtx.lineWidth = 2;
+                $scope.bbCanvasCtx.stroke();
+            }
+        }
 
         $scope.updateRatio = function() {
             var occupied = $scope.total - $scope.free;
