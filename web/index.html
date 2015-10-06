@@ -78,10 +78,26 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/socket.io/socket.io.js"></script>
         <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="bower_components/webcam/app/scripts/webcam.js"></script>
         <script src="app.js"></script>
         <script src="circles.js"></script>
+        <script>
+var video_constraints = {
+   mandatory: {
+       minHeight: 480,
+       minWidth: 640 
+   },
+   optional: []
+};
+
+var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+getUserMedia({'audio':true,
+    'video':{"mandatory": {"minWidth": 1280, "minHeight": 720}, "optional": []}},
+    function(){},
+    function(){});
+        </script>
 </body>
 
 </html>

@@ -10,6 +10,12 @@ function eventFire(el, etype) {
 
 angular.module('mainApp', ["pubnub.angular.service", "webcam"])
     .controller('mainController', function($rootScope, $scope, $location, PubNub, $timeout, $interval) {
+        var socket = io();
+        var _video = null;
+
+
+
+
         $scope.devices = {};
         $scope.free = 2;
         $scope.total = 2;
@@ -17,12 +23,12 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
         $scope.bbCanvasCtx = $scope.bbCanvas.getContext("2d");
         $scope.bbCanvasCtx.strokeStyle = "#FF0000";
 
-        var _video = null;
+
         $scope.patOpts = {
             x: 0,
             y: 0,
-            w: 25,
-            h: 25
+            w: 50,
+            h: 50
         };
 
         $interval(function() {
@@ -79,6 +85,8 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
                 ctxPat.putImageData(idata, 0, 0);
 
                 console.log(patCanvas.toDataURL());
+
+                socket.emit('snapshot', patCanvas.toDataURL());
             }
         };
 
