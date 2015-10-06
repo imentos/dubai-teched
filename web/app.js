@@ -98,7 +98,7 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
             for (var i = 0; i < bboxes.length; i++) {
                 var bbox = bboxes[i];
                 $scope.bbCanvasCtx.beginPath()
-                $scope.bbCanvasCtx.rect(1200.0 * (bbox.x / 8.33) / 489, 900.0 * (bbox.y / 8.33) / 367, 1200.0 * (bbox.w / 8.33) / 489, 900.0 * (bbox.h / 8.33) / 367);
+                $scope.bbCanvasCtx.rect(1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240), 1200.0 * (bbox.w / 320), 900.0 * (bbox.h / 240));
                 $scope.bbCanvasCtx.lineWidth = 2;
                 $scope.bbCanvasCtx.stroke();
             }
@@ -119,17 +119,14 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
         }
 
         $scope.updateTraffic = function() {
-            // var canvas = document.getElementById("trafficCanvas");
-            // canvas.style.top = "-10px";
-            // canvas.style.left = "-10px";
-            // canvas.style.position = "absolute";
-            // var ctx = canvas.getContext("2d");
-            // ctx.strokeStyle = "#FF0000";
-            // ctx.beginPath();
-            // ctx.moveTo(0, 0);
-            // ctx.lineWidth = 1;
-            // ctx.lineTo(300, 150);
-            // ctx.stroke();
+            var canvas = document.getElementById("trafficCanvas");
+            var ctx = canvas.getContext("2d");
+            ctx.strokeStyle = "#FF0000";
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineWidth = 1;
+            ctx.lineTo(300, 150);
+            ctx.stroke();
         }
 
         $scope.updateTraffic();
