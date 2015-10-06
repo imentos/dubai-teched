@@ -185,6 +185,7 @@ a {
     /*z-index: -100;*/
     background-size: cover;
     overflow: hidden;
+    -webkit-filter: grayscale(100%)
 }
 
 #bbCanvas {
