@@ -118,22 +118,28 @@ angular.module('mainApp', ["webcam"])
         $scope.updateTraffic = function(carCount) {
             var canvas = document.getElementById("trafficCanvas");
             var ctx = canvas.getContext("2d");
-            if (carCount < 3) {
-                ctx.strokeStyle = "#00FF00";
-            } else if (carCount >= 3 && carCount < 5) {
-                ctx.strokeStyle = "#FFFF00";
-            } else if (carCount >= 5) {
-                ctx.strokeStyle = "#FF0000";
-            }
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.lineWidth = 5;
-            ctx.lineTo(300, 150);
-            ctx.stroke();
+            // if (carCount < 3) {
+            //     ctx.strokeStyle = "#00FF00";
+            // } else if (carCount >= 3 && carCount < 5) {
+            //     ctx.strokeStyle = "#FFFF00";
+            // } else if (carCount >= 5) {
+            //     ctx.strokeStyle = "#FF0000";
+            // }
+            // ctx.beginPath();
+            // ctx.moveTo(0, 0);
+            // ctx.lineWidth = 5;
+            // ctx.lineTo(300, 150);
+            // ctx.stroke();
+
+            var imageObj = new Image();
+            imageObj.onload = function() {
+                ctx.drawImage(imageObj, 350, 60, 666, 468);
+            };
+            imageObj.src = 'Path.png';
         }
 
         // test
-        //$scope.updateTraffic(4);
+        $scope.updateTraffic(4);
         $('#popover').popover({
             container: ".livefeed"
         });
