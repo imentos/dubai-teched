@@ -8,13 +8,10 @@ function eventFire(el, etype) {
     }
 }
 
-angular.module('mainApp', ["pubnub.angular.service", "webcam"])
-    .controller('mainController', function($rootScope, $scope, $location, PubNub, $timeout, $interval) {
+angular.module('mainApp', ["webcam"])
+    .controller('mainController', function($rootScope, $scope, $location, $timeout, $interval) {
         var socket = io();
         var _video = null;
-
-
-
 
         $scope.devices = {};
         $scope.free = 2;
@@ -143,75 +140,51 @@ angular.module('mainApp', ["pubnub.angular.service", "webcam"])
 
         $scope.updateRatio();
 
-        if (!$rootScope.initialized) {
-            // Initialize the PubNub service
-            PubNub.init({
-                subscribe_key: 'sub-c-22a3eac0-0971-11e5-bf9c-0619f8945a4f',
-                publish_key: 'pub-c-c9bc3d23-4bc7-44a7-a1dc-c2d1f9445a25'
-            });
-            $rootScope.initialized = true;
-        }
-
-
-
-
-
-
 
 
         //////////////////////////////////////////////////////
-
-        // bounding box sockets
-        PubNub.ngSubscribe({
-            channel: 'bbox'
-        });
-        $rootScope.$on(PubNub.ngMsgEv('bbox'), function(ngEvent, payload) {
-            $scope.$apply(function() {
-                console.log(payload.message);
-
-                $scope.updateBoundingBox(payload.message);
-                
-                $scope.updateTraffic(payload.message.length);
-            });
-        });
-
-        // parking sockets
-        PubNub.ngSubscribe({
-            channel: 'Parking Lot 1'
-        });
-        $rootScope.$on(PubNub.ngMsgEv('Parking Lot 1'), function(ngEvent, payload) {
-            $scope.$apply(function() {
-                console.log(payload.message);
-                if (payload.message.status) {
-                    if (payload.message.status == "free") {
-                        $scope.free++;
-                    } else {
-                        $scope.free--;
-                    }
-
-                    if ($scope.free < 0) {
-                        $scope.free++;
-                        alert("Cannot be less than zero")
-                        return;
-                    }
-
-                    if ($scope.free > $scope.total) {
-                        $scope.free--;
-                        alert("Only two parking lots")
-                        return;
-                    }
-
-                    // logic for popup
-                    $('#popover').popover({
-                        container: ".livefeed"
-                    });
-                    eventFire($("#popover")[0], "click");
-                    $timeout(function() {
-                        $('#popover').popover('destroy');
-                    }, 3000);
-
-                    $scope.updateRatio();
+        // socket.io
+        socket.on('Parking Lot 1', function(msg) {
+            console.log(msg);
+            if (msg.status) {
+                if (msg.status == "free") {
+                    $scope.free++;
+                } else {
+                    $scope.free--;
                 }
-            });
+
+                if ($scope.free < 0) {
+                    $scope.free++;
+                    alert("Cannot be less than zero")
+                    return;
+                }
+
+                if ($scope.free > $scope.total) {
+                    $scope.free--;
+                    alert("Only two parking lots")
+                    return;
+                }
+
+                // logic for popup
+                $('#popover').popover({
+                    container: ".livefeed"
+                });
+                eventFire($("#popover")[0], "click");
+                $timeout(function() {
+                    $('#popover').popover('destroy');
+                }, 3000);
+
+                $scope.updateRatio();
+            }
+        });
+
+        socket.on('bbox', function(msg) {
+            $scope.$apply(function() {
+                console.log(msg);
+
+                $scope.updateBoundingBox(msg);
+
+                $scope.updateTraffic(msg.length);
+            });            
         });
     });

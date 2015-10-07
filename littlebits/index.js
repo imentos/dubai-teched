@@ -7,6 +7,13 @@ var pubnub = require('pubnub').init({
     //proxy: {hostname:'proxy', port:8080}
 });
 
+var socket = require('socket.io-client')('http://localhost:3000');
+socket.on('connect', function() {
+    console.log('connect')
+});
+socket.on('event', function(data) {});
+socket.on('disconnect', function() {});
+
 board = new five.Board();
 board.on("ready", function() {
     led = new five.Led(5);
@@ -16,11 +23,8 @@ board.on("ready", function() {
         console.log(channel + ":occupied");
         led.off();
 
-        pubnub.publish({
-            channel: channel,
-            message: {
-                "status": "occupied"
-            }
+        socket.emit(channel, {
+            "status": "occupied"
         });
     });
 
@@ -28,11 +32,8 @@ board.on("ready", function() {
         console.log(channel + ":free");
         led.on();
 
-        pubnub.publish({
-            channel: channel,
-            message: {
-                "status": "free"
-            }
+        socket.emit(channel, {
+            "status": "free"
         });
     });
 });
