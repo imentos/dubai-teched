@@ -18,11 +18,11 @@ body {
 }
 
 .top {
-    height: 60%;
+    height: 67%;
 }
 
 .bottom {
-    height: 40%;
+    height: 33%;
 }
 
 .container {
@@ -53,7 +53,8 @@ body {
 
 .traffic {
     display: table-cell;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("traffic.png")
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("Map.png");
+    background-size: 100%;
 }
 
 .parking {
@@ -64,8 +65,16 @@ body {
 h1 {
     color: white;
     padding-left: 25px;
-    font-family: ben-light;
+    font-family: ben-medium;
     font-weight: bold;
+}
+
+.title {
+    font-size: 50px;
+    color: black;
+    font-family: ben-medium;
+    font-weight: bold;
+    padding-top: 50px;
 }
 
 .occupied {
