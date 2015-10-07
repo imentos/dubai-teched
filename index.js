@@ -23,12 +23,15 @@ io.on('connection', function(socket) {
         });
     });
 
-    // receive from littlebits
-    socket.on('Parking Lot 1', function(msg) {
-        console.log(msg);
-        // send back to web page
-        io.emit('Parking Lot 1', msg);
-    });
+    // receive from littlebits, and send back to website
+    for (var i = 1; i <= 6; i++) {
+        (function(index) {
+            socket.on('lot' + index, function(msg) {
+                console.log('lot' + index + ":" + msg.status);
+                io.emit('lot' + index, msg);
+            });
+        })(i);
+    }
 
     // from karthik
     socket.on('bbox', function(msg) {

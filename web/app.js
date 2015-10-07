@@ -14,8 +14,8 @@ angular.module('mainApp', ["webcam"])
         var _video = null;
 
         $scope.devices = {};
-        $scope.free = 2;
-        $scope.total = 2;
+        $scope.free = 6;
+        $scope.total = 6;
         $scope.bbCanvas = $("#bbCanvas")[0];
         $scope.bbCanvasCtx = $scope.bbCanvas.getContext("2d");
         $scope.bbCanvasCtx.strokeStyle = "#FF0000";
@@ -106,7 +106,7 @@ angular.module('mainApp', ["webcam"])
             var percentage = 100 * (occupied / $scope.total);
             Circles.create({
                 id: 'ratioDiv',
-                percentage: percentage,
+                percentage: parseFloat(percentage).toFixed(0),
                 radius: 80,
                 width: 10,
                 number: percentage,
@@ -144,39 +144,43 @@ angular.module('mainApp', ["webcam"])
 
         //////////////////////////////////////////////////////
         // socket.io
-        socket.on('Parking Lot 1', function(msg) {
-            console.log(msg);
-            if (msg.status) {
-                if (msg.status == "free") {
-                    $scope.free++;
-                } else {
-                    $scope.free--;
-                }
+        for (var i = 1; i <= 6; i++) {
+            (function(index) {
+                socket.on('lot' + index, function(msg) {
+                    console.log(msg);
+                    if (msg.status) {
+                        if (msg.status == "free") {
+                            $scope.free++;
+                        } else {
+                            $scope.free--;
+                        }
 
-                if ($scope.free < 0) {
-                    $scope.free++;
-                    alert("Cannot be less than zero")
-                    return;
-                }
+                        if ($scope.free < 0) {
+                            $scope.free++;
+                            alert("Cannot be less than zero")
+                            return;
+                        }
 
-                if ($scope.free > $scope.total) {
-                    $scope.free--;
-                    alert("Only two parking lots")
-                    return;
-                }
+                        if ($scope.free > $scope.total) {
+                            $scope.free--;
+                            alert("Only two parking lots")
+                            return;
+                        }
 
-                // logic for popup
-                $('#popover').popover({
-                    container: ".livefeed"
+                        // logic for popup
+                        $('#popover').popover({
+                            container: ".livefeed"
+                        });
+                        eventFire($("#popover")[0], "click");
+                        $timeout(function() {
+                            $('#popover').popover('destroy');
+                        }, 3000);
+
+                        $scope.updateRatio();
+                    }
                 });
-                eventFire($("#popover")[0], "click");
-                $timeout(function() {
-                    $('#popover').popover('destroy');
-                }, 3000);
-
-                $scope.updateRatio();
-            }
-        });
+            })(i);
+        }
 
         socket.on('bbox', function(msg) {
             $scope.$apply(function() {
@@ -185,6 +189,6 @@ angular.module('mainApp', ["webcam"])
                 $scope.updateBoundingBox(msg);
 
                 $scope.updateTraffic(msg.length);
-            });            
+            });
         });
     });

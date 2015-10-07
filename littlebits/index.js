@@ -1,7 +1,5 @@
 var five = require("johnny-five"),
-    board, led, button;
-var channel = 'Parking Lot 1';
-
+    board;
 var socket = require('socket.io-client')('http://localhost:3000');
 socket.on('connect', function() {
     console.log('connect')
@@ -11,24 +9,24 @@ socket.on('disconnect', function() {});
 
 board = new five.Board();
 board.on("ready", function() {
-    led = new five.Led(5);
-    button = new five.Switch(0);
-
-    button.on("open", function(value) {
-        console.log(channel + ":occupied");
-        led.off();
-
-        socket.emit(channel, {
-            "status": "occupied"
+    new five.Sensor({
+        pin: 0,
+        type: "digital",
+        threshold: 500
+    }).on("change", function() {
+        console.log(this.value);
+        socket.emit('lot1', {
+            "status": this.value == 1 ? "free" : "occupied"
         });
     });
 
-    button.on("close", function(value) {
-        console.log(channel + ":free");
-        led.on();
-
-        socket.emit(channel, {
-            "status": "free"
+    new five.Sensor({
+        pin: "A1",
+        threshold: 500
+    }).scale(0, 10).on("change", function() {
+        console.log(this.value);
+        socket.emit('lot2', {
+            "status": this.value > 8 ? "free" : "occupied"
         });
     });
 });
