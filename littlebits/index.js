@@ -1,11 +1,6 @@
 var five = require("johnny-five"),
     board, led, button;
 var channel = 'Parking Lot 1';
-var pubnub = require('pubnub').init({
-    publish_key: 'pub-c-c9bc3d23-4bc7-44a7-a1dc-c2d1f9445a25',
-    subscribe_key: 'sub-c-22a3eac0-0971-11e5-bf9c-0619f8945a4f',
-    //proxy: {hostname:'proxy', port:8080}
-});
 
 var socket = require('socket.io-client')('http://localhost:3000');
 socket.on('connect', function() {
