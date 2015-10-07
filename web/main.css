@@ -122,7 +122,11 @@ h1 {
 .popover {
     max-width: 100%;
     /* Max Width of the popover (depending on the container!) */
-    background-color: #40AFCB;
+    /*background-color: #40AFCB;*/
+    background: url(Notification.png);
+    background-size: 100% 100%;
+    -webkit-box-shadow: none;
+    border: 0px;
 }
 
 .popover.top {
@@ -135,7 +139,7 @@ h1 {
 }
 
 .popover-content {
-    background-color: #40AFCB;
+    /*background-color: #40AFCB;*/
     font-size: 45px;
     color: white;
 }
@@ -165,10 +169,11 @@ h1 {
 
 .arrow {
     /*border-width: 50px !important;*/
+    visibility: hidden;
 }
 
 a {
-    color: transparent;
+    color: white;
 }
 
 .popover.top .arrow:after {
