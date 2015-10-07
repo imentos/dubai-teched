@@ -13,8 +13,8 @@ body {
     height: 100%;
     width: 100%;
     background-color: #202020;
-    overflow-x:hidden;
-    overflow-y:hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .top {
@@ -75,6 +75,8 @@ h1 {
     font-family: ben-medium;
     font-weight: bold;
     padding-top: 50px;
+    z-index: 2;
+    position: inherit;
 }
 
 .occupied {
