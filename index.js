@@ -3,6 +3,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var fs = require("fs");
+var config = require('./config.json');
 var counter = 0;
 
 app.use(express.static('web'));
@@ -17,8 +18,8 @@ io.on('connection', function(socket) {
     });
 
     socket.on('snapshot', function(msg) {
-        var base64Data = msg.replace(/^data:image\/jpeg;base64,/, "");
-        fs.writeFile("out.jpg", base64Data, 'base64', function(err) {
+        var base64Data = msg.replace(/^data:image\/jpeg;base64,/, "");       
+        fs.writeFile(config.imageLocation + "out" + counter++ + ".jpg", base64Data, 'base64', function(err) {
             console.log(err);
         });
     });
