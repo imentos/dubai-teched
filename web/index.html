@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>SAP Teched Demo-Smart City</title>
+    <title>Smart City & Traffic Control powered by Deep Learning</title>
     <!-- Bootstrap -->
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="main.css" rel="stylesheet">
@@ -23,11 +23,10 @@
     <div class="container top">
         <div class="row toprow">
             <div class="col-md-12 no-float livefeed">
-                <div class="title">DEEP LEARNING POWERED OBJECT RECOGNITION</div>
+                <div class="title">SMART CITY POWERED BY DEEP LEARNING</div>
                 <canvas id="bbCanvas" width="1200px" height="900px">
                 </canvas>
                 <webcam channel="myChannel" on-stream="onStream(stream)" on-streaming="onSuccess()" on-error="onError(err)"></webcam>
-                <!--                 <div class="BG"></div> -->
             </div>
         </div>
     </div>
@@ -35,7 +34,11 @@
         <div class="col-md-6"></div>
         <div class="col-md-6">
             <div class="my-container">
-                <a id="popover" href="#" data-toggle="popover" title="" data-content="<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>This <b>is</b> your div content</div><div class='p-blank'></div><div class='p-title'>Suggestion:</div><div class='p-content'>Using parking lot 2 on 11th st</div>" data-html="true" data-placement="top">
+                <!--                 <a id="popover" href="#" data-toggle="popover" title="" data-content="<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>Parking lot on Main Street 66% occupied</div><div class='p-blank'></div><div class='p-title'>Suggestion:</div><div class='p-content'>Open overflow parking on Unity Street</div>" data-html="true" data-placement="top">
+                Toggle popover asdasd asd asd asd asd as d</a> -->
+                <!--                                 <a id="popover" href="#" data-toggle="popover" title="" data-content="<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>Traffic density on Main Street at 90%</div><div class='p-blank'></div><div class='p-title'>Suggestion:</div><div class='p-content'>Send routing update to void area</div>" data-html="true" data-placement="top">
+                Toggle popover asdasd asd asd asd asd as d</a> -->
+                <a id="popover" href="#" data-toggle="popover" title="" data-content="<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>{{alertContent}}</div><div class='p-blank'></div><div class='p-title'>Suggestion:</div><div class='p-content'>{{suggestionContent}}</div>" data-html="true" data-placement="top">
                 Toggle popover asdasd asd asd asd asd as d</a>
             </div>
         </div>
@@ -68,7 +71,7 @@
                         <div class="adjust info">Occupied</div>
                     </div>
                     <div class="col-md-4">
-                        <div class="adjust info">Occupied Ratio</div>
+                        <div class="adjust info">Ratio</div>
                     </div>
                 </div>
             </div>

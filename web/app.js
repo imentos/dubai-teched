@@ -15,10 +15,14 @@ angular.module('mainApp', ["webcam"])
 
         $scope.devices = {};
         $scope.free = 6;
+        $scope.curFree = 6;
         $scope.total = 6;
+        $scope.carCount = 0;
         $scope.bbCanvas = $("#bbCanvas")[0];
         $scope.bbCanvasCtx = $scope.bbCanvas.getContext("2d");
         $scope.bbCanvasCtx.strokeStyle = "#FF0000";
+        $scope.alertContent = "test";
+        $scope.suggestionContent = "test";
 
         // video
         $scope.patOpts = {
@@ -83,21 +87,16 @@ angular.module('mainApp', ["webcam"])
         //////////////////////////////////////////////////////
         $scope.updateBoundingBox = function(bboxes) {
             $scope.bbCanvasCtx.clearRect(0, 0, $scope.bbCanvas.width, $scope.bbCanvas.height);
-
-            // // test
-            // $scope.bbCanvasCtx.beginPath()
-            // $scope.bbCanvasCtx.moveTo(0, 0);
-            // $scope.bbCanvasCtx.lineTo(1200.0, 900.0);
-            // $scope.bbCanvasCtx.lineWidth = 2;
-            // $scope.bbCanvasCtx.stroke();
-
-
             for (var i = 0; i < bboxes.length; i++) {
                 var bbox = bboxes[i];
                 $scope.bbCanvasCtx.beginPath()
                 $scope.bbCanvasCtx.rect(1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240), 1200.0 * (bbox.w / 320), 900.0 * (bbox.h / 240));
                 $scope.bbCanvasCtx.lineWidth = 2;
                 $scope.bbCanvasCtx.stroke();
+
+                $scope.bbCanvasCtx.font = "30px Arial";
+                $scope.bbCanvasCtx.fillStyle = "red";
+                $scope.bbCanvasCtx.fillText("car", 1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240));
             }
         }
 
@@ -115,22 +114,27 @@ angular.module('mainApp', ["webcam"])
             });
         }
 
+            $('#popover').popover({
+                container: ".livefeed"
+            });
+        $scope.showNotification = function(timeout) {
+            $('#popover').popover("show");
+            $timeout(function() {
+                $('#popover').popover('hide');
+            }, timeout);
+        }
+        $scope.showNotification(100);
+
         $scope.updateTraffic = function(carCount) {
+            if ($scope.carCount == 4 && carCount == 5) {
+                $scope.alertContent = "Traffic density on Main Street at 90%";
+                $scope.suggestionContent = "Send routing update to void area";
+                $scope.showNotification(5000);
+            }
+            $scope.carCount = carCount;
+
             var canvas = document.getElementById("trafficCanvas");
             var ctx = canvas.getContext("2d");
-            // if (carCount < 3) {
-            //     ctx.strokeStyle = "#00FF00";
-            // } else if (carCount >= 3 && carCount < 5) {
-            //     ctx.strokeStyle = "#FFFF00";
-            // } else if (carCount >= 5) {
-            //     ctx.strokeStyle = "#FF0000";
-            // }
-            // ctx.beginPath();
-            // ctx.moveTo(0, 0);
-            // ctx.lineWidth = 5;
-            // ctx.lineTo(300, 150);
-            // ctx.stroke();
-
 
             var mapImage = new Image();
             mapImage.onload = function() {
@@ -140,19 +144,20 @@ angular.module('mainApp', ["webcam"])
                 pathImage.onload = function() {
                     ctx.drawImage(pathImage, 450, 0, 666, 468);
                 };
-                pathImage.src = 'Path.png';
+                if (carCount < 3) {
+                    pathImage.src = 'images/Path_Green.png';
+                } else if (carCount >= 3 && carCount < 5) {
+                    pathImage.src = 'images/Path_Yellow.png';
+                } else if (carCount >= 5) {
+                    pathImage.src = 'images/Path_Red.png';
+                }
             };
-            mapImage.src = 'Map.png';
+            mapImage.src = 'images/Map.png';
         }
-
-        // test
-        $scope.updateTraffic(4);
-        $('#popover').popover({
-            container: ".livefeed"
-        });
 
         $scope.updateRatio();
 
+        $scope.updateTraffic(0);
 
 
         //////////////////////////////////////////////////////
@@ -180,16 +185,14 @@ angular.module('mainApp', ["webcam"])
                             return;
                         }
 
-                        // logic for popup
-                        $('#popover').popover({
-                            container: ".livefeed"
-                        });
-                        eventFire($("#popover")[0], "click");
-                        $timeout(function() {
-                            $('#popover').popover('destroy');
-                        }, 3000);
+                        if ($scope.free == 2 && $scope.curFree == 3) {
+                            $scope.alertContent = "Parking lot on Main Street 66% occupied";
+                            $scope.suggestionContent = "Open overflow parking on Unity Street";
+                            $scope.showNotification(5000);
+                        }
 
                         $scope.updateRatio();
+                        $scope.curFree = $scope.free
                     }
                 });
             })(i);
