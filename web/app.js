@@ -131,11 +131,18 @@ angular.module('mainApp', ["webcam"])
             // ctx.lineTo(300, 150);
             // ctx.stroke();
 
-            var imageObj = new Image();
-            imageObj.onload = function() {
-                ctx.drawImage(imageObj, 450, -50, 666, 468);
+
+            var mapImage = new Image();
+            mapImage.onload = function() {
+                ctx.drawImage(mapImage, 0, 0, 1916, 660);
+
+                var pathImage = new Image();
+                pathImage.onload = function() {
+                    ctx.drawImage(pathImage, 450, 0, 666, 468);
+                };
+                pathImage.src = 'Path.png';
             };
-            imageObj.src = 'Path.png';
+            mapImage.src = 'Map.png';
         }
 
         // test
