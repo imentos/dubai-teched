@@ -133,7 +133,7 @@ angular.module('mainApp', ["webcam"])
 
             var imageObj = new Image();
             imageObj.onload = function() {
-                ctx.drawImage(imageObj, 350, 20, 666, 468);
+                ctx.drawImage(imageObj, 450, -50, 666, 468);
             };
             imageObj.src = 'Path.png';
         }
