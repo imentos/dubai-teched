@@ -53,7 +53,7 @@ body {
 
 .traffic {
     display: table-cell;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("Map.png");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
     background-size: 100%;
 }
 
@@ -125,7 +125,7 @@ h1 {
     max-width: 100%;
     /* Max Width of the popover (depending on the container!) */
     /*background-color: #40AFCB;*/
-    background: url(Notification.png);
+    background: url('images/Notification.png');
     background-size: 100% 100%;
     -webkit-box-shadow: none;
     border: 0px;
@@ -212,15 +212,8 @@ a {
     min-height: 100%;
     width: auto;
     height: auto;
+    /* debug for lower divs */
     z-index: 1;
     background-size: cover;
     overflow: hidden;
-}
-
-.BG {
-    width: 1920px !important;
-    height: 1028px !important;
-    background: url(IMG_0175-1.jpg);
-    margin: auto;
-    background-size: 100% 100%;
 }
