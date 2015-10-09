@@ -9,7 +9,7 @@ function eventFire(el, etype) {
 }
 
 angular.module('mainApp', ["webcam"])
-    .controller('mainController', function($rootScope, $scope, $location, $timeout, $interval) {
+    .controller('mainController', function($rootScope, $scope, $location, $timeout, $interval, $compile) {
         var socket = io();
         var _video = null;
 
@@ -115,22 +115,32 @@ angular.module('mainApp', ["webcam"])
         }
 
             $('#popover').popover({
-                container: ".livefeed"
+                container: ".livefeed",
+                content: $compile($('#popover').siblings('.pop-content').contents())($scope)
             });
         $scope.showNotification = function(timeout) {
             $('#popover').popover("show");
-            $timeout(function() {
-                $('#popover').popover('hide');
-            }, timeout);
+            // $timeout(function() {
+            //     $('#popover').popover('hide');
+            // }, timeout);
         }
         $scope.showNotification(100);
 
         $scope.updateTraffic = function(carCount) {
-            if ($scope.carCount == 4 && carCount == 5) {
-                $scope.alertContent = "Traffic density on Main Street at 90%";
-                $scope.suggestionContent = "Send routing update to void area";
-                $scope.showNotification(5000);
+            if (carCount == 4) {
+                $scope.alertContent = "4";
+                $scope.suggestionContent = "test4";
+                $scope.showNotification(5000);                
             }
+            if (carCount == 5) {
+                $scope.alertContent = "5";
+                $scope.suggestionContent = "test5";
+                $scope.showNotification(5000);                
+            }            // if ($scope.carCount == 4 && carCount == 5) {
+            //     $scope.alertContent = "Traffic density on Main Street at 90%";
+            //     $scope.suggestionContent = "Send routing update to void area";
+            //     $scope.showNotification(5000);
+            // }
             $scope.carCount = carCount;
 
             var canvas = document.getElementById("trafficCanvas");
