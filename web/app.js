@@ -9,6 +9,19 @@ function eventFire(el, etype) {
 }
 
 angular.module('mainApp', ["webcam"])
+    .directive('popover', function($compile) {
+    return {
+        link: function(scope, element, attrs) {
+            // define popover for this element
+            $(element).popover({
+                html: true,
+                placement: "top",
+                // grab popover content from the next element
+                content: $compile( $(element).siblings(".pop-content").contents() )(scope)
+            });
+        }
+    }        
+    })
     .controller('mainController', function($rootScope, $scope, $location, $timeout, $interval) {
         var socket = io();
         var _video = null;
