@@ -8,20 +8,7 @@ function eventFire(el, etype) {
     }
 }
 
-angular.module('mainApp', ["webcam","$compileProvider"])
-    .directive('popover', function($compile) {
-        return {
-            link: function(scope, element, attrs) {
-                // define popover for this element
-                $(element).popover({
-                    html: true,
-                    placement: "top",
-                    // grab popover content from the next element
-                    content: $compile($(element).siblings(".pop-content").contents())(scope)
-                });
-            }
-        }
-    })
+angular.module('mainApp', ["webcam"])
     .controller('mainController', function($rootScope, $scope, $location, $timeout, $interval) {
         var socket = io();
         var _video = null;
@@ -127,23 +114,29 @@ angular.module('mainApp', ["webcam","$compileProvider"])
             });
         }
 
-        $('#popover').popover({
-            container: ".livefeed",
-            content: $compile($('#popover').siblings('.pop-content').contents())($scope)
-        });
+        // $('#popover').popover({
+        //     container: ".livefeed"
+        // });
         $scope.showNotification = function(timeout) {
             $('#popover').popover("show");
             // $timeout(function() {
             //     $('#popover').popover('hide');
             // }, timeout);
         }
-        $scope.showNotification(100);
+        // $scope.showNotification(100);
 
         $scope.updateTraffic = function(carCount) {
             if (carCount == 4) {
-                $scope.alertContent = "4";
-                $scope.suggestionContent = "test4";
-                $scope.showNotification(5000);
+                // $scope.alertContent = "4";
+                // $scope.suggestionContent = "test4";
+                // $scope.showNotification(5000);
+
+                // toastr.info('Are you the 6 fingered man?')    
+                toastr.options = {  
+                "timeOut": "500000"
+                };       
+                toastr.getContainer(".livefeed");
+                toastr.info("<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>vf</div><div class='p-blank'></div><div class='p-title'>Suggestion:</div><div class='p-content'>sfsdfds</div>")
             }
             if (carCount == 5) {
                 $scope.alertContent = "5";

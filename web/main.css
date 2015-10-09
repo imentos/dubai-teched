@@ -153,7 +153,7 @@ h1 {
 
 .p-title {
     margin: auto;
-    width: 750px;
+    /*width: 750px;*/
     text-align: center;
     font-family: ben-medium;
 }
@@ -164,7 +164,7 @@ h1 {
 
 .p-content {
     margin: auto;
-    width: 750px;
+    /*width: 750px;*/
     text-align: center;
     font-family: ben-light;
 }
