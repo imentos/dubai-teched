@@ -8,19 +8,19 @@ function eventFire(el, etype) {
     }
 }
 
-angular.module('mainApp', ["webcam"])
+angular.module('mainApp', ["webcam","$compileProvider"])
     .directive('popover', function($compile) {
-    return {
-        link: function(scope, element, attrs) {
-            // define popover for this element
-            $(element).popover({
-                html: true,
-                placement: "top",
-                // grab popover content from the next element
-                content: $compile( $(element).siblings(".pop-content").contents() )(scope)
-            });
+        return {
+            link: function(scope, element, attrs) {
+                // define popover for this element
+                $(element).popover({
+                    html: true,
+                    placement: "top",
+                    // grab popover content from the next element
+                    content: $compile($(element).siblings(".pop-content").contents())(scope)
+                });
+            }
         }
-    }        
     })
     .controller('mainController', function($rootScope, $scope, $location, $timeout, $interval) {
         var socket = io();
@@ -127,23 +127,33 @@ angular.module('mainApp', ["webcam"])
             });
         }
 
-            $('#popover').popover({
-                container: ".livefeed"
-            });
+        $('#popover').popover({
+            container: ".livefeed",
+            content: $compile($('#popover').siblings('.pop-content').contents())($scope)
+        });
         $scope.showNotification = function(timeout) {
             $('#popover').popover("show");
-            $timeout(function() {
-                $('#popover').popover('hide');
-            }, timeout);
+            // $timeout(function() {
+            //     $('#popover').popover('hide');
+            // }, timeout);
         }
         $scope.showNotification(100);
 
         $scope.updateTraffic = function(carCount) {
-            if ($scope.carCount == 4 && carCount == 5) {
-                $scope.alertContent = "Traffic density on Main Street at 90%";
-                $scope.suggestionContent = "Send routing update to void area";
+            if (carCount == 4) {
+                $scope.alertContent = "4";
+                $scope.suggestionContent = "test4";
                 $scope.showNotification(5000);
             }
+            if (carCount == 5) {
+                $scope.alertContent = "5";
+                $scope.suggestionContent = "test5";
+                $scope.showNotification(5000);
+            } // if ($scope.carCount == 4 && carCount == 5) {
+            //     $scope.alertContent = "Traffic density on Main Street at 90%";
+            //     $scope.suggestionContent = "Send routing update to void area";
+            //     $scope.showNotification(5000);
+            // }
             $scope.carCount = carCount;
 
             var canvas = document.getElementById("trafficCanvas");
