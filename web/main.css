@@ -156,6 +156,7 @@ h1 {
     /*width: 750px;*/
     text-align: center;
     font-family: ben-medium;
+    font-size: 45px;
 }
 
 .p-blank {
@@ -167,6 +168,7 @@ h1 {
     /*width: 750px;*/
     text-align: center;
     font-family: ben-light;
+    font-size: 45px;
 }
 
 .arrow {
@@ -216,4 +218,29 @@ a {
     z-index: 1;
     background-size: cover;
     overflow: hidden;
+}
+
+#toast-container > div {
+    width: 100% !important;
+}
+
+.toast-info {
+    background-color: transparent !important;
+    -webkit-box-shadow: none !important;
+    border: 0px !important;
+}
+
+#toast-container > .toast-info {
+    background-size: 0 0 !important;
+
+}
+
+.notification {
+    left: 50%;
+    bottom: 33%;
+    width: 33%;
+    height: 30%;
+    background-image: url('images/Notification.png');
+    background-size: 100% 100%;
+    opacity: 0.7;
 }

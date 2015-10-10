@@ -118,25 +118,39 @@ angular.module('mainApp', ["webcam"])
         //     container: ".livefeed"
         // });
         $scope.showNotification = function(timeout) {
-            $('#popover').popover("show");
-            // $timeout(function() {
-            //     $('#popover').popover('hide');
-            // }, timeout);
-        }
-        // $scope.showNotification(100);
+                $('#popover').popover("show");
+                // $timeout(function() {
+                //     $('#popover').popover('hide');
+                // }, timeout);
+            }
+            // $scope.showNotification(100);
 
         $scope.updateTraffic = function(carCount) {
             if (carCount == 4) {
                 // $scope.alertContent = "4";
                 // $scope.suggestionContent = "test4";
                 // $scope.showNotification(5000);
+   
+                toastr.clear();
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": false,
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut",
 
-                // toastr.info('Are you the 6 fingered man?')    
-                toastr.options = {  
-                "timeOut": "500000"
-                };       
-                toastr.getContainer(".livefeed");
-                toastr.info("<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>vf</div><div class='p-blank'></div><div class='p-title'>Suggestion:</div><div class='p-content'>sfsdfds</div>")
+                    "positionClass": "notification"
+                };
+                toastr.info("<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>Traffic density on Main Street at 90%</div><div class='p-blank'></div><div class='p-title'>Suggestion:</div><div class='p-content'>Send routing update to void area</div>")
             }
             if (carCount == 5) {
                 $scope.alertContent = "5";
