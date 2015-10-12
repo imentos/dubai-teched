@@ -79,6 +79,12 @@ h1 {
     position: inherit;
 }
 
+.logo {
+    background-image: url("images/Logo.png")
+    z-index: 2;
+    position: inherit;
+}
+
 .occupied {
     text-align: center;
     font-size: 175px;
@@ -215,7 +221,7 @@ a {
     width: auto;
     height: auto;
     /* debug for lower divs */
-    z-index: 1;
+    /*z-index: 1;*/
     background-size: cover;
     overflow: hidden;
 }
