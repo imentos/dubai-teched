@@ -70,7 +70,7 @@ angular.module('mainApp', ["webcam"])
                 var idata = getVideoData($scope.patOpts.x, $scope.patOpts.y, $scope.patOpts.w, $scope.patOpts.h);
                 ctxPat.putImageData(idata, 0, 0);
 
-                console.log(patCanvas.toDataURL('image/jpeg'));
+                //console.log(patCanvas.toDataURL('image/jpeg'));
 
                 // send to server to dump the image
                 socket.emit('snapshot', patCanvas.toDataURL('image/jpeg'));
@@ -98,11 +98,6 @@ angular.module('mainApp', ["webcam"])
             });
         }
 
-
-
-
-
-
         //////////////////////////////////////////////////////
         $scope.updateBoundingBox = function(bboxes) {
             $scope.bbCanvasCtx.clearRect(0, 0, $scope.bbCanvas.width, $scope.bbCanvas.height);
@@ -110,12 +105,12 @@ angular.module('mainApp', ["webcam"])
                 var bbox = bboxes[i];
                 $scope.bbCanvasCtx.beginPath()
                 $scope.bbCanvasCtx.rect(1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240), 1200.0 * (bbox.w / 320), 900.0 * (bbox.h / 240));
-                $scope.bbCanvasCtx.lineWidth = 2;
+                //$scope.bbCanvasCtx.lineWidth = 2;
                 $scope.bbCanvasCtx.stroke();
 
-                $scope.bbCanvasCtx.font = "30px Arial";
+                $scope.bbCanvasCtx.font = "15pt ben-light";
                 $scope.bbCanvasCtx.fillStyle = "red";
-                $scope.bbCanvasCtx.fillText("car", 1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240));
+                $scope.bbCanvasCtx.fillText("car", 1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240) - 10);
             }
         }
 
@@ -172,7 +167,7 @@ angular.module('mainApp', ["webcam"])
         for (var i = 1; i <= 6; i++) {
             (function(index) {
                 socket.on('lot' + index, function(msg) {
-                    console.log(msg);
+                    console.log('lot' + index + ": " + msg.status);
                     if (msg.status) {
                         if (msg.status == "free") {
                             $scope.free++;
