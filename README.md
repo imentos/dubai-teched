@@ -5,8 +5,13 @@
   ```
   npm install
   ```
-  
-2. Go to ```web``` folder
+
+2. Go to ```littlebits``` folder:
+  ```
+  npm install
+  ```
+
+3. Go to ```web``` folder
   ```
   bower install
   ```
@@ -17,4 +22,9 @@
   node index.js
   ```
   
-2. Go to [http://localhost:3000/index.html](http://localhost:3000/index.html) in Chrome
+2. Go to ```littlebits``` folder:
+  ```
+  node index.js
+  ```
+  
+3. Go to [http://localhost:3000/index.html](http://localhost:3000/index.html) in Chrome
