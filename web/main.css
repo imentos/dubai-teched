@@ -80,9 +80,10 @@ h1 {
 }
 
 .logo {
-    background-image: url("images/Logo.png")
     z-index: 2;
     position: inherit;
+    height: 15em;
+    margin: auto;
 }
 
 .occupied {
