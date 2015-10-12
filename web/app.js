@@ -13,16 +13,12 @@ angular.module('mainApp', ["webcam"])
         var socket = io();
         var _video = null;
 
-        $scope.devices = {};
         $scope.free = 6;
         $scope.curFree = 6;
         $scope.total = 6;
-        $scope.carCount = 0;
         $scope.bbCanvas = $("#bbCanvas")[0];
         $scope.bbCanvasCtx = $scope.bbCanvas.getContext("2d");
         $scope.bbCanvasCtx.strokeStyle = "#FF0000";
-        $scope.alertContent = "test";
-        $scope.suggestionContent = "test";
         toastr.options = {
             "closeButton": false,
             "debug": false,
