@@ -23,6 +23,25 @@ angular.module('mainApp', ["webcam"])
         $scope.bbCanvasCtx.strokeStyle = "#FF0000";
         $scope.alertContent = "test";
         $scope.suggestionContent = "test";
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": false,
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "3000",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            // "showMethod": "fadeIn",
+            // "hideMethod": "fadeOut",
+            "showMethod": "slideDown",
+            "hideMethod": "slideUp",
+            "positionClass": "my-toastr"
+        };
 
         // video
         $scope.patOpts = {
@@ -114,53 +133,11 @@ angular.module('mainApp', ["webcam"])
             });
         }
 
-        // $('#popover').popover({
-        //     container: ".livefeed"
-        // });
-        $scope.showNotification = function(timeout) {
-                $('#popover').popover("show");
-                // $timeout(function() {
-                //     $('#popover').popover('hide');
-                // }, timeout);
-            }
-            // $scope.showNotification(100);
-
         $scope.updateTraffic = function(carCount) {
-            if (carCount == 4) {
-                // $scope.alertContent = "4";
-                // $scope.suggestionContent = "test4";
-                // $scope.showNotification(5000);
-   
+            if ($scope.carCount == 4 && carCount == 5) {
                 toastr.clear();
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": true,
-                    "progressBar": false,
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut",
-
-                    "positionClass": "notification"
-                };
                 toastr.info("<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>Traffic density on Main Street at 90%</div><div class='p-blank'></div><div class='p-title'>Suggestion:</div><div class='p-content'>Send routing update to void area</div>")
             }
-            if (carCount == 5) {
-                $scope.alertContent = "5";
-                $scope.suggestionContent = "test5";
-                $scope.showNotification(5000);
-            } // if ($scope.carCount == 4 && carCount == 5) {
-            //     $scope.alertContent = "Traffic density on Main Street at 90%";
-            //     $scope.suggestionContent = "Send routing update to void area";
-            //     $scope.showNotification(5000);
-            // }
             $scope.carCount = carCount;
 
             var canvas = document.getElementById("trafficCanvas");
@@ -215,14 +192,15 @@ angular.module('mainApp', ["webcam"])
                             return;
                         }
 
-                        if ($scope.free == 2 && $scope.curFree == 3) {
-                            $scope.alertContent = "Parking lot on Main Street 66% occupied";
-                            $scope.suggestionContent = "Open overflow parking on Unity Street";
-                            $scope.showNotification(5000);
+                        if ($scope.free == 5 && $scope.curFree == 6) {
+                            // if ($scope.free == 2 && $scope.curFree == 3) {
+                            toastr.clear();
+                            toastr.info("<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>Parking lot on Main Street 66% occupied</div><div class='p-blank'></div>" +
+                                "<div class='p-title'>Suggestion:</div><div class='p-content'>Open overflow parking on Unity Street</div>")
                         }
 
-                        $scope.updateRatio();
                         $scope.curFree = $scope.free
+                        $scope.updateRatio();
                     }
                 });
             })(i);
