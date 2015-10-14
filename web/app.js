@@ -128,7 +128,7 @@ angular.module('mainApp', ["webcam"])
             if ($scope.carCount == 4 && carCount == 5) {
                 toastr.clear();
                 toastr.info("<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>Traffic density on Main Street at 90%</div><div class='p-blank'></div>"
-                 + "<div class='p-title'>Suggestion:</div><div class='p-content'>Send routing update to void area</div>")
+                 + "<div class='p-title'>Suggestion:</div><div class='p-content'>Send routing update to avoid area</div>")
             }
             $scope.carCount = carCount;
 
