@@ -101,7 +101,7 @@ angular.module('mainApp', ["webcam"])
                 var bbox = bboxes[i];
                 $scope.bbCanvasCtx.beginPath()
                 $scope.bbCanvasCtx.rect(1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240), 1200.0 * (bbox.w / 320), 900.0 * (bbox.h / 240));
-                $scope.bbCanvasCtx.lineWidth = 2;
+                $scope.bbCanvasCtx.lineWidth = 4;
                 $scope.bbCanvasCtx.stroke();
 
                 $scope.bbCanvasCtx.font = "15pt ben-light";
