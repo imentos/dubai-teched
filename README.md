@@ -28,3 +28,14 @@
   ```
   
 3. Go to [http://localhost:3000/index.html](http://localhost:3000/index.html) in Chrome
+
+## Output Image Location:
+Go to ```root\config.json```
+```
+{
+	"imageLocation": "<YOUR IMAGE OUTPUT LOCATION>"
+}
+```
+
+## Sensors Adjustment:
+Right now the physical sensor sensitivity has been set to maximum (clockwise to the end), but there are few parameters which you can adjust in the applications.
