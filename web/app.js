@@ -101,7 +101,7 @@ angular.module('mainApp', ["webcam"])
                 var bbox = bboxes[i];
                 $scope.bbCanvasCtx.beginPath()
                 $scope.bbCanvasCtx.rect(1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240), 1200.0 * (bbox.w / 320), 900.0 * (bbox.h / 240));
-                //$scope.bbCanvasCtx.lineWidth = 2;
+                $scope.bbCanvasCtx.lineWidth = 2;
                 $scope.bbCanvasCtx.stroke();
 
                 $scope.bbCanvasCtx.font = "15pt ben-light";
@@ -184,8 +184,8 @@ angular.module('mainApp', ["webcam"])
                             return;
                         }
 
-                        if ($scope.free == 5 && $scope.curFree == 6) {
-                            // if ($scope.free == 2 && $scope.curFree == 3) {
+                        // if ($scope.free == 5 && $scope.curFree == 6) {
+                            if ($scope.free == 2 && $scope.curFree == 3) {
                             toastr.clear();
                             toastr.info("<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>Parking lot on Main Street 66% occupied</div><div class='p-blank'></div>" +
                                 "<div class='p-title'>Suggestion:</div><div class='p-content'>Open overflow parking on Unity Street</div>")
