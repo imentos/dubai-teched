@@ -6,21 +6,25 @@ socket.on('connect', function() {
 socket.on('event', function(data) {});
 socket.on('disconnect', function() {});
 
-var ports = [
-  { id: "A", port: "/dev/cu.usbmodem1411" },
-  { id: "B", port: "/dev/cu.usbmodem1451" }
-];
+var ports = [{
+    id: "A",
+    port: "/dev/cu.usbmodem1411"
+}, {
+    id: "B",
+    port: "/dev/cu.usbmodem1451"
+}];
+
 new five.Boards(ports).on("ready", function() {
-    var threshold = 1;
-    var statusThreshold = 5;
-    var freq = 100;
+    var statusThreshold = 2;
+    var changeThreshold = 200;
+    var checkFreq = 200;
 
     this.each(function(board) {
         // new five.Sensor({
         //     pin: 0,
         //     type: "digital",
-        //     freq: 100,
-        //     threshold: 500,
+        //     freq: checkFreq,
+        //     threshold: changeThreshold,
         //     board: board
         // }).on("change", function() {
         //     console.log(board.id + "(D0): " + this.value);
@@ -32,8 +36,8 @@ new five.Boards(ports).on("ready", function() {
         new five.Sensor({
             pin: "A0",
             type: "analog",
-            threshold: threshold,
-            freq: freq,
+            threshold: changeThreshold,
+            freq: checkFreq,
             board: board
         }).scale(0, 10).on("change", function() {
             console.log(board.id + "(A0): " + this.value);
@@ -44,8 +48,8 @@ new five.Boards(ports).on("ready", function() {
 
         new five.Sensor({
             pin: "A1",
-            threshold: threshold,
-            freq: freq,
+            threshold: changeThreshold,
+            freq: checkFreq,
             board: board
         }).scale(0, 10).on("change", function() {
             console.log(board.id + "(A1):" + this.value);

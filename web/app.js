@@ -174,13 +174,13 @@ angular.module('mainApp', ["webcam"])
 
                         if ($scope.free < 0) {
                             $scope.free++;
-                            alert("Cannot be less than zero")
+                            //alert("Cannot be less than zero")
                             return;
                         }
 
                         if ($scope.free > $scope.total) {
                             $scope.free--;
-                            alert("Only two parking lots")
+                            //alert("Only two parking lots")
                             return;
                         }
 
