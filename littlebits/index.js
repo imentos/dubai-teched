@@ -1,5 +1,7 @@
 var five = require("johnny-five");
 var socket = require('socket.io-client')('http://localhost:3000');
+var config = require('./config.json');
+
 socket.on('connect', function() {
     console.log('connect')
 });
@@ -15,9 +17,9 @@ var ports = [{
 }];
 
 new five.Boards(ports).on("ready", function() {
-    var statusThreshold = 2;
-    var changeThreshold = 200;
-    var checkFreq = 200;
+    var statusThreshold = config.statusThreshold;
+    var changeThreshold = config.changeThreshold;
+    var checkFreq = config.checkFreq;
 
     this.each(function(board) {
         // new five.Sensor({
