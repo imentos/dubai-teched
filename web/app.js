@@ -19,25 +19,7 @@ angular.module('mainApp', ["webcam"])
         $scope.bbCanvas = $("#bbCanvas")[0];
         $scope.bbCanvasCtx = $scope.bbCanvas.getContext("2d");
         $scope.bbCanvasCtx.strokeStyle = "#FF0000";
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": true,
-            "progressBar": false,
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "3000",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            // "showMethod": "fadeIn",
-            // "hideMethod": "fadeOut",
-            "showMethod": "slideDown",
-            "hideMethod": "slideUp",
-            "positionClass": "my-toastr"
-        };
+
 
         // video
         $scope.patOpts = {
@@ -113,12 +95,13 @@ angular.module('mainApp', ["webcam"])
         $scope.updateRatio = function() {
             var occupied = $scope.total - $scope.free;
             var percentage = 100 * (occupied / $scope.total);
+            var percentageString = parseFloat(percentage.toString()).toFixed(0)
             Circles.create({
                 id: 'ratioDiv',
-                percentage: parseFloat(percentage).toFixed(0),
+                percentage: parseFloat(percentageString),
                 radius: 80,
                 width: 10,
-                number: percentage,
+                //number: percentage,
                 text: '%',
                 colors: ['#888', '#F00']
             });
@@ -127,8 +110,26 @@ angular.module('mainApp', ["webcam"])
         $scope.updateTraffic = function(carCount) {
             if ($scope.carCount == 4 && carCount == 5) {
                 toastr.clear();
-                toastr.info("<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>Traffic density on Main Street at 90%</div><div class='p-blank'></div>"
-                 + "<div class='p-title'>Suggestion:</div><div class='p-content'>Send routing update to avoid area</div>")
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": false,
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    // "showMethod": "fadeIn",
+                    // "hideMethod": "fadeOut",
+                    "showMethod": "slideDown",
+                    "hideMethod": "slideUp",
+                    "positionClass": "traffic-toastr"
+                };
+                toastr.info("<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>Traffic density on Main Street at 90%</div><div class='p-blank'></div>" + "<div class='p-title'>Suggestion:</div><div class='p-content'>Send routing update to avoid area</div>")
             }
             $scope.carCount = carCount;
 
@@ -184,9 +185,28 @@ angular.module('mainApp', ["webcam"])
                             return;
                         }
 
-                        // if ($scope.free == 5 && $scope.curFree == 6) {
-                            if ($scope.free == 2 && $scope.curFree == 3) {
+                        if ($scope.free == 5 && $scope.curFree == 6) {
+                        // if ($scope.free == 2 && $scope.curFree == 3) {
                             toastr.clear();
+                            toastr.options = {
+                                "closeButton": false,
+                                "debug": false,
+                                "newestOnTop": true,
+                                "progressBar": false,
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": "3000",
+                                "hideDuration": "1000",
+                                "timeOut": "5000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                // "showMethod": "fadeIn",
+                                // "hideMethod": "fadeOut",
+                                "showMethod": "slideDown",
+                                "hideMethod": "slideUp",
+                                "positionClass": "parking-toastr"
+                            };
                             toastr.info("<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>Parking lot on Main Street 66% occupied</div><div class='p-blank'></div>" +
                                 "<div class='p-title'>Suggestion:</div><div class='p-content'>Open overflow parking on Unity Street</div>")
                         }

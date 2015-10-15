@@ -1,5 +1,5 @@
 {
-	"statusThreshold": 2,
+	"statusThreshold": 8,
 	"changeThreshold": 200,
 	"checkFreq": 200
 }
