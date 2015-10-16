@@ -77,7 +77,7 @@ angular.module('mainApp', ["webcam"])
         }
 
         //////////////////////////////////////////////////////
-        $scope.updateBoundingBox = function(bboxes) {
+        $scope.updateBoundingBox = function(type, bboxes) {
             $scope.bbCanvasCtx.clearRect(0, 0, $scope.bbCanvas.width, $scope.bbCanvas.height);
             for (var i = 0; i < bboxes.length; i++) {
                 var bbox = bboxes[i];
@@ -88,7 +88,7 @@ angular.module('mainApp', ["webcam"])
 
                 $scope.bbCanvasCtx.font = "15pt ben-light";
                 $scope.bbCanvasCtx.fillStyle = "red";
-                $scope.bbCanvasCtx.fillText("car", 1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240) - 10);
+                $scope.bbCanvasCtx.fillText(type, 1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240) - 10);
             }
         }
 
