@@ -244,7 +244,6 @@ angular.module('mainApp', ["webcam"])
         socket.on('car', function(msg) {
             $scope.$apply(function() {
                 console.log(msg);
-
                 $scope.updateBoundingBox('car', msg);
 
                 $scope.updateTraffic(msg.length);
@@ -254,50 +253,35 @@ angular.module('mainApp', ["webcam"])
         socket.on('dog', function(msg) {
             $scope.$apply(function() {
                 console.log(msg);
-
                 $scope.updateBoundingBox('dog', msg);
-
-                $scope.updateTraffic(msg.length);
-            });
+           });
         });
 
         socket.on('sheep', function(msg) {
             $scope.$apply(function() {
                 console.log(msg);
-
                 $scope.updateBoundingBox('sheep', msg);
-
-                $scope.updateTraffic(msg.length);
             });
         });
 
         socket.on('cow', function(msg) {
             $scope.$apply(function() {
                 console.log(msg);
-
                 $scope.updateBoundingBox('cow', msg);
-
-                $scope.updateTraffic(msg.length);
             });
         });
 
         socket.on('bird', function(msg) {
             $scope.$apply(function() {
                 console.log(msg);
-
                 $scope.updateBoundingBox('bird', msg);
-
-                $scope.updateTraffic(msg.length);
-            });
+           });
         });
 
         socket.on('person', function(msg) {
             $scope.$apply(function() {
                 console.log(msg);
-
                 $scope.updateBoundingBox('person', msg);
-
-                $scope.updateTraffic(msg.length);
             });
         });
     });
