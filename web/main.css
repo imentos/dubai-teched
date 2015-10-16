@@ -219,7 +219,7 @@ a {
     /*-webkit-filter: grayscale(100%)*/
 }
 
-#carCanvas, #cowCanvas {
+#carCanvas, #dogCanvas, #sheepCanvas, #cowCanvas, #birdCanvas, #personCanvas {
     position: absolute;
     right: 0;
     top: 0;

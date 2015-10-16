@@ -24,10 +24,25 @@ angular.module('mainApp', ["webcam"])
         $scope.contexes["car"] = $("#carCanvas")[0].getContext("2d");
         $scope.contexes["car"].strokeStyle = "#FF0000";
 
+        $scope.canvases["dog"] = $("#cowCanvas")[0];
+        $scope.contexes["dog"] = $("#cowCanvas")[0].getContext("2d");
+        $scope.contexes["dog"].strokeStyle = "#FF0000";
+
+        $scope.canvases["sheep"] = $("#carCanvas")[0];
+        $scope.contexes["sheep"] = $("#carCanvas")[0].getContext("2d");
+        $scope.contexes["sheep"].strokeStyle = "#FF0000";
+
         $scope.canvases["cow"] = $("#cowCanvas")[0];
         $scope.contexes["cow"] = $("#cowCanvas")[0].getContext("2d");
         $scope.contexes["cow"].strokeStyle = "#FF0000";
 
+        $scope.canvases["bird"] = $("#carCanvas")[0];
+        $scope.contexes["bird"] = $("#carCanvas")[0].getContext("2d");
+        $scope.contexes["bird"].strokeStyle = "#FF0000";
+
+        $scope.canvases["person"] = $("#cowCanvas")[0];
+        $scope.contexes["person"] = $("#cowCanvas")[0].getContext("2d");
+        $scope.contexes["person"].strokeStyle = "#FF0000";
 
         // video
         $scope.patOpts = {
@@ -98,21 +113,6 @@ angular.module('mainApp', ["webcam"])
                 $scope.contexes[type].fillStyle = "red";
                 $scope.contexes[type].fillText(type, 1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240) - 10);
             }
-
-
-
-            // $scope.bbCanvasCtx.clearRect(0, 0, $scope.bbCanvas.width, $scope.bbCanvas.height);
-            // for (var i = 0; i < bboxes.length; i++) {
-            //     var bbox = bboxes[i];
-            //     $scope.bbCanvasCtx.beginPath()
-            //     $scope.bbCanvasCtx.rect(1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240), 1200.0 * (bbox.w / 320), 900.0 * (bbox.h / 240));
-            //     $scope.bbCanvasCtx.lineWidth = 4;
-            //     $scope.bbCanvasCtx.stroke();
-
-            //     $scope.bbCanvasCtx.font = "15pt ben-light";
-            //     $scope.bbCanvasCtx.fillStyle = "red";
-            //     $scope.bbCanvasCtx.fillText(type, 1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240) - 10);
-            // }
         }
 
         $scope.updateRatio = function() {
