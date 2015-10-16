@@ -24,24 +24,24 @@ angular.module('mainApp', ["webcam"])
         $scope.contexes["car"] = $("#carCanvas")[0].getContext("2d");
         $scope.contexes["car"].strokeStyle = "#FF0000";
 
-        $scope.canvases["dog"] = $("#cowCanvas")[0];
-        $scope.contexes["dog"] = $("#cowCanvas")[0].getContext("2d");
+        $scope.canvases["dog"] = $("#dogCanvas")[0];
+        $scope.contexes["dog"] = $("#dogCanvas")[0].getContext("2d");
         $scope.contexes["dog"].strokeStyle = "#FF0000";
 
-        $scope.canvases["sheep"] = $("#carCanvas")[0];
-        $scope.contexes["sheep"] = $("#carCanvas")[0].getContext("2d");
+        $scope.canvases["sheep"] = $("#sheepCanvas")[0];
+        $scope.contexes["sheep"] = $("#sheepCanvas")[0].getContext("2d");
         $scope.contexes["sheep"].strokeStyle = "#FF0000";
 
         $scope.canvases["cow"] = $("#cowCanvas")[0];
         $scope.contexes["cow"] = $("#cowCanvas")[0].getContext("2d");
         $scope.contexes["cow"].strokeStyle = "#FF0000";
 
-        $scope.canvases["bird"] = $("#carCanvas")[0];
-        $scope.contexes["bird"] = $("#carCanvas")[0].getContext("2d");
+        $scope.canvases["bird"] = $("#birdCanvas")[0];
+        $scope.contexes["bird"] = $("#birdCanvas")[0].getContext("2d");
         $scope.contexes["bird"].strokeStyle = "#FF0000";
 
-        $scope.canvases["person"] = $("#cowCanvas")[0];
-        $scope.contexes["person"] = $("#cowCanvas")[0].getContext("2d");
+        $scope.canvases["person"] = $("#personCanvas")[0];
+        $scope.contexes["person"] = $("#personCanvas")[0].getContext("2d");
         $scope.contexes["person"].strokeStyle = "#FF0000";
 
         // video
