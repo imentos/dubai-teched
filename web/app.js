@@ -98,7 +98,7 @@ angular.module('mainApp', ["webcam"])
             var percentageString = parseFloat(percentage.toString()).toFixed(0)
             Circles.create({
                 id: 'ratioDiv',
-                percentage: parseFloat(percentageString),
+                percentage: Math.floor(percentage),
                 radius: 80,
                 width: 10,
                 //number: percentage,
@@ -185,8 +185,7 @@ angular.module('mainApp', ["webcam"])
                             return;
                         }
 
-                        if ($scope.free == 5 && $scope.curFree == 6) {
-                        // if ($scope.free == 2 && $scope.curFree == 3) {
+                         if ($scope.free == 2 && $scope.curFree == 3) {
                             toastr.clear();
                             toastr.options = {
                                 "closeButton": false,
