@@ -1,5 +1,13 @@
 {
+	// This value controls which value will trigger the event about status 'free' or 'occupired'. 
+	// This value is scaled down to 0-10.
 	"statusThreshold": 8,
-	"changeThreshold": 200,
-	"checkFreq": 200
+
+	// This value controls how the status is changed so that we know that 'free' to 'occupied' or vice versa.
+	// This value is between 0-1023 before scale down.
+	"changeThreshold": 100,
+
+	// This value controls how often we read sensor value. 
+	// This value is based on milliseconds. 
+	"checkFreq": 300
 }
