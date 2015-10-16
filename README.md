@@ -48,6 +48,9 @@ The physical sensor sensitivity has been set to maximum (clockwise to the end), 
 Go to ```littlebits\config.json```
 ```
 {
+	// This value is for ardunio board
+	"port": "/dev/cu.usbmodem14531",
+
 	// This value controls which value will trigger the event about status 'free' or 'occupired'. 
 	// This value is scaled down to 0-10.
 	"statusThreshold": 8,
