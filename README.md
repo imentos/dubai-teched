@@ -40,27 +40,25 @@ Go to ```root\config.json```
 ```
 
 ## Sensors:
-We have three ardunio boards (two littlebits arduino and one UNO arduino) in this demo to check 6 parking lots. Based on the USB ports, each board might be assigned to different port. In Karthik machine, it should be ```ttyACM0```,  ```ttyACM1```, and ```ttyACM2```
+We use one Ardunio board (UNO) to read 6 light sensors. Based on the USB ports, this board should be assigned to ```ttyACM0```.
 
 ## Sensors Adjustment:
-The physical sensor sensitivity has been set to maximum (clockwise to the end), but there are few parameters which you can adjust in the applications based on the demo conditions.
-
 Go to ```littlebits\config.json```
 ```
 {
 	// This value is for ardunio board
-	"port": "/dev/cu.usbmodem14531",
+	"port": "/dev/ttyACM0",
 
-	// This value controls which value will trigger the event about status 'free' or 'occupired'. 
+	// This threhold controls when the status change will be triggered. For example, 'free' or 'occupired'. 
 	// This value is scaled down to 0-10.
-	"statusThreshold": 8,
+	"statusThreshold": 5,
 
-	// This value controls how the status is changed so that we know that 'free' to 'occupied' or vice versa.
+	// This threhold controls when the value is changed. For example, the change happens when the amount is over 500.
 	// This value is between 0-1023 before scale down.
-	"changeThreshold": 100,
+	"changeThreshold": 500,
 
 	// This value controls how often we read sensor value. 
 	// This value is based on milliseconds. 
-	"checkFreq": 300
+	"checkFreq": 500
 }
 ```
