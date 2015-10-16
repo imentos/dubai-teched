@@ -185,7 +185,7 @@ angular.module('mainApp', ["webcam"])
                             return;
                         }
 
-                         if ($scope.free == 2 && $scope.curFree == 3) {
+                        if ($scope.free == 2 && $scope.curFree == 3) {
                             toastr.clear();
                             toastr.options = {
                                 "closeButton": false,
@@ -217,11 +217,62 @@ angular.module('mainApp', ["webcam"])
             })(i);
         }
 
-        socket.on('bbox', function(msg) {
+
+        socket.on('car', function(msg) {
             $scope.$apply(function() {
                 console.log(msg);
 
-                $scope.updateBoundingBox(msg);
+                $scope.updateBoundingBox('car', msg);
+
+                $scope.updateTraffic(msg.length);
+            });
+        });
+
+        socket.on('dog', function(msg) {
+            $scope.$apply(function() {
+                console.log(msg);
+
+                $scope.updateBoundingBox('dog', msg);
+
+                $scope.updateTraffic(msg.length);
+            });
+        });
+
+        socket.on('sheep', function(msg) {
+            $scope.$apply(function() {
+                console.log(msg);
+
+                $scope.updateBoundingBox('sheep', msg);
+
+                $scope.updateTraffic(msg.length);
+            });
+        });
+
+        socket.on('cow', function(msg) {
+            $scope.$apply(function() {
+                console.log(msg);
+
+                $scope.updateBoundingBox('cow', msg);
+
+                $scope.updateTraffic(msg.length);
+            });
+        });
+
+        socket.on('bird', function(msg) {
+            $scope.$apply(function() {
+                console.log(msg);
+
+                $scope.updateBoundingBox('bird', msg);
+
+                $scope.updateTraffic(msg.length);
+            });
+        });
+
+        socket.on('person', function(msg) {
+            $scope.$apply(function() {
+                console.log(msg);
+
+                $scope.updateBoundingBox('person', msg);
 
                 $scope.updateTraffic(msg.length);
             });
