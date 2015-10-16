@@ -1,6 +1,6 @@
 # Smart City & Traffic Control powered by Deep Learning
 
-## How to setup:
+## Setup:
 1. Go to ```root``` folder:
   ```
   npm install
@@ -16,7 +16,7 @@
   bower install
   ```
   
-## How to start:
+## Startup:
 1. Go to ```root``` folder:
   ```
   node index.js
@@ -36,6 +36,9 @@ Go to ```root\config.json```
 	"imageLocation": "<YOUR IMAGE OUTPUT LOCATION>"
 }
 ```
+
+## Sensors:
+We have three ardunio boards (two littlebits arduino and one UNO arduino) in this demo to check 6 parking lots. Based on the USB ports, each board might be assigned to different port. In Karthik machine, it should be ```ttyACM0```,  ```ttyACM1```, and ```ttyACM2```
 
 ## Sensors Adjustment:
 The physical sensor sensitivity has been set to maximum (clockwise to the end), but there are few parameters which you can adjust in the applications based on the demo conditions.
