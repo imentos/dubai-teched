@@ -38,4 +38,21 @@ Go to ```root\config.json```
 ```
 
 ## Sensors Adjustment:
-Right now the physical sensor sensitivity has been set to maximum (clockwise to the end), but there are few parameters which you can adjust in the applications.
+The physical sensor sensitivity has been set to maximum (clockwise to the end), but there are few parameters which you can adjust in the applications based on the demo conditions.
+
+Go to ```littlebits\config.json```
+```
+{
+	// This value controls which value will trigger the event about status 'free' or 'occupired'. 
+	// This value is scaled down to 0-10.
+	"statusThreshold": 8,
+
+	// This value controls how the status is changed so that we know that 'free' to 'occupied' or vice versa.
+	// This value is between 0-1023 before scale down.
+	"changeThreshold": 100,
+
+	// This value controls how often we read sensor value. 
+	// This value is based on milliseconds. 
+	"checkFreq": 300
+}
+```
