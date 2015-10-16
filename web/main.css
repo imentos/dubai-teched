@@ -219,7 +219,7 @@ a {
     /*-webkit-filter: grayscale(100%)*/
 }
 
-#bbCanvas {
+#carCanvas, #cowCanvas {
     position: absolute;
     right: 0;
     top: 0;

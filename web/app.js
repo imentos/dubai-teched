@@ -16,9 +16,17 @@ angular.module('mainApp', ["webcam"])
         $scope.free = 6;
         $scope.curFree = 6;
         $scope.total = 6;
-        $scope.bbCanvas = $("#bbCanvas")[0];
-        $scope.bbCanvasCtx = $scope.bbCanvas.getContext("2d");
-        $scope.bbCanvasCtx.strokeStyle = "#FF0000";
+
+        $scope.canvases = {};
+        $scope.contexes = {};
+
+        $scope.canvases["car"] = $("#carCanvas")[0];
+        $scope.contexes["car"] = $("#carCanvas")[0].getContext("2d");
+        $scope.contexes["car"].strokeStyle = "#FF0000";
+
+        $scope.canvases["cow"] = $("#cowCanvas")[0];
+        $scope.contexes["cow"] = $("#cowCanvas")[0].getContext("2d");
+        $scope.contexes["cow"].strokeStyle = "#FF0000";
 
 
         // video
@@ -78,18 +86,33 @@ angular.module('mainApp', ["webcam"])
 
         //////////////////////////////////////////////////////
         $scope.updateBoundingBox = function(type, bboxes) {
-            $scope.bbCanvasCtx.clearRect(0, 0, $scope.bbCanvas.width, $scope.bbCanvas.height);
+            $scope.contexes[type].clearRect(0, 0, $scope.canvases[type].width, $scope.canvases[type].height);
             for (var i = 0; i < bboxes.length; i++) {
                 var bbox = bboxes[i];
-                $scope.bbCanvasCtx.beginPath()
-                $scope.bbCanvasCtx.rect(1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240), 1200.0 * (bbox.w / 320), 900.0 * (bbox.h / 240));
-                $scope.bbCanvasCtx.lineWidth = 4;
-                $scope.bbCanvasCtx.stroke();
+                $scope.contexes[type].beginPath()
+                $scope.contexes[type].rect(1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240), 1200.0 * (bbox.w / 320), 900.0 * (bbox.h / 240));
+                $scope.contexes[type].lineWidth = 4;
+                $scope.contexes[type].stroke();
 
-                $scope.bbCanvasCtx.font = "15pt ben-light";
-                $scope.bbCanvasCtx.fillStyle = "red";
-                $scope.bbCanvasCtx.fillText(type, 1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240) - 10);
+                $scope.contexes[type].font = "15pt ben-light";
+                $scope.contexes[type].fillStyle = "red";
+                $scope.contexes[type].fillText(type, 1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240) - 10);
             }
+
+
+
+            // $scope.bbCanvasCtx.clearRect(0, 0, $scope.bbCanvas.width, $scope.bbCanvas.height);
+            // for (var i = 0; i < bboxes.length; i++) {
+            //     var bbox = bboxes[i];
+            //     $scope.bbCanvasCtx.beginPath()
+            //     $scope.bbCanvasCtx.rect(1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240), 1200.0 * (bbox.w / 320), 900.0 * (bbox.h / 240));
+            //     $scope.bbCanvasCtx.lineWidth = 4;
+            //     $scope.bbCanvasCtx.stroke();
+
+            //     $scope.bbCanvasCtx.font = "15pt ben-light";
+            //     $scope.bbCanvasCtx.fillStyle = "red";
+            //     $scope.bbCanvasCtx.fillText(type, 1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240) - 10);
+            // }
         }
 
         $scope.updateRatio = function() {
