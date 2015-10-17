@@ -46,7 +46,7 @@ We use one Ardunio board (UNO) to read 6 light sensors. Based on the USB ports, 
 Go to ```littlebits\config.json```
 ```
 {
-	// This value is for ardunio board
+	// This value is the Ubuntu USB port for Ardunio board.
 	"port": "/dev/ttyACM0",
 
 	// This threhold controls when the status change will be triggered. For example, 'free' or 'occupied'. 
