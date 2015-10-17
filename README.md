@@ -40,7 +40,7 @@ Go to ```root\config.json```
 ```
 
 ## Sensors:
-We use one Ardunio board (UNO) to read 6 light sensors. Based on the USB ports, this board should be assigned to ```ttyACM0```.
+We use one Ardunio board (UNO) to read 6 light sensors. Based on the USB ports, this board should be assigned to ```ttyACM0```. Please see the following circuit diagram for the light sensor setting. [https://github.com/rwaldron/johnny-five/blob/master/docs/photoresistor.md](https://github.com/rwaldron/johnny-five/blob/master/docs/photoresistor.md)
 
 ## Sensors Adjustment:
 Go to ```littlebits\config.json```
@@ -49,7 +49,7 @@ Go to ```littlebits\config.json```
 	// This value is for ardunio board
 	"port": "/dev/ttyACM0",
 
-	// This threhold controls when the status change will be triggered. For example, 'free' or 'occupired'. 
+	// This threhold controls when the status change will be triggered. For example, 'free' or 'occupied'. 
 	// This value is scaled down to 0-10.
 	"statusThreshold": 5,
 
@@ -62,3 +62,4 @@ Go to ```littlebits\config.json```
 	"checkFreq": 500
 }
 ```
+
