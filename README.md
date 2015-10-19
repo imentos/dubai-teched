@@ -53,15 +53,15 @@ Go to ```littlebits\config.json```
 	// This value is the Ubuntu USB port for Ardunio board.
 	"port": "/dev/ttyACM0",
 
-	// This threhold controls when the status change will be triggered. For example, 'free' or 'occupied'. 
+	// This threhold controls when the status changes is triggered. For example, 'free' or 'occupied'. 
 	// This value is scaled down to 0-10.
 	"statusThreshold": 5,
 
-	// This threhold controls when the value is changed. For example, the change happens when the amount is over 500.
-	// This value is between 0-1023 before scale down.
+	// This threhold controls when the value changes is triggered. For example, the change ONLY happens when the change amount is over 500.
+	// This value is between 0-1023.
 	"changeThreshold": 500,
 
-	// This value controls how often we read sensor value. 
+	// This value controls how often the value is read. 
 	// This value is based on milliseconds. 
 	"checkFreq": 500
 }
