@@ -29,6 +29,10 @@
   
 3. Go to [http://localhost:3000/index.html](http://localhost:3000/index.html) in Chrome
 
+**NOTE**: Make sure that **NO** cars are in the parking lots before you start the website. The free parking should always start with **6**.
+
+
+
 ## Output Image Location:
 We capture images from webcam every second and save into this location for Karthik's algorithm. It is important to have the right location. Otherwise, car counting won't work.
 
