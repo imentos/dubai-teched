@@ -29,7 +29,7 @@
   
 3. Go to [http://localhost:3000/index.html](http://localhost:3000/index.html) in Chrome
 
-**NOTE**: Make sure that **NO** cars are in the parking lots before you start the website. The free parking should always start with **6**.
+**NOTE**: Make sure that **NO** cars are in the parking lots before you start the website or restart the application. The free parking should always start with **6**.
 
 
 
